@@ -1,0 +1,16 @@
+[16:03:53.095170 WARN] EnergyPlus returned a non-zero exit code. Check the stdout-energyplus log.
+[16:03:53.095572 ERROR] :/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/util/energyplus.rb failed with EnergyPlus Terminated with a Fatal Error. Check eplusout.err log., :/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/util/energyplus.rb:223:in `call_energyplus'
+:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/jobs/run_energyplus.rb:63:in `perform'
+:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/run.rb:291:in `step'
+:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/run.rb:233:in `run'
+:/openstudio_cli.rb:1187:in `execute'
+:/openstudio_cli.rb:817:in `execute'
+:/openstudio_cli.rb:1984:in `<main>'
+eval:188:in `eval'
+eval:188:in `require_embedded_absolute'
+eval:173:in `block in require_embedded'
+eval:167:in `each'
+eval:167:in `require_embedded'
+eval:126:in `require'
+eval:3:in `<main>'
+[16:03:53.097477 ERROR] Found error in state 'simulation' with message [":/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/util/energyplus.rb failed with EnergyPlus Terminated with a Fatal Error. Check eplusout.err log., :/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/util/energyplus.rb:223:in `call_energyplus'\n:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/jobs/run_energyplus.rb:63:in `perform'\n:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/run.rb:291:in `step'\n:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/run.rb:233:in `run'\n:/openstudio_cli.rb:1187:in `execute'\n:/openstudio_cli.rb:817:in `execute'\n:/openstudio_cli.rb:1984:in `<main>'\neval:188:in `eval'\neval:188:in `require_embedded_absolute'\neval:173:in `block in require_embedded'\neval:167:in `each'\neval:167:in `require_embedded'\neval:126:in `require'\neval:3:in `<main>'::/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/util/energyplus.rb:241:in `rescue in call_energyplus'\n:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/util/energyplus.rb:238:in `call_energyplus'\n:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/jobs/run_energyplus.rb:63:in `perform'\n:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/run.rb:291:in `step'\n:/ruby/2.7.0/gems/openstudio-workflow-2.3.1/lib/openstudio/workflow/run.rb:233:in `run'\n:/openstudio_cli.rb:1187:in `execute'\n:/openstudio_cli.rb:817:in `execute'\n:/openstudio_cli.rb:1984:in `<main>'\neval:188:in `eval'\neval:188:in `require_embedded_absolute'\neval:173:in `block in require_embedded'\neval:167:in `each'\neval:167:in `require_embedded'\neval:126:in `require'\neval:3:in `<main>'"]}

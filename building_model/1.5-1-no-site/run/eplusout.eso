@@ -1,0 +1,31 @@
+Program Version,EnergyPlus, Version 23.1.0-87ed9199d4, YMD=2024.01.16 16:03
+1,5,Environment Title[],Latitude[deg],Longitude[deg],Time Zone[],Elevation[m]
+2,8,Day of Simulation[],Month[],Day of Month[],DST Indicator[1=yes 0=no],Hour[],StartMinute[],EndMinute[],DayType
+3,5,Cumulative Day of Simulation[],Month[],Day of Month[],DST Indicator[1=yes 0=no],DayType  ! When Daily Report Variables Requested
+4,2,Cumulative Days of Simulation[],Month[]  ! When Monthly Report Variables Requested
+5,1,Cumulative Days of Simulation[] ! When Run Period Report Variables Requested
+6,1,Calendar Year of Simulation[] ! When Annual Report Variables Requested
+7,1,THERMAL ZONE 1,Zone Outdoor Air Drybulb Temperature [C] !TimeStep
+8,1,THERMAL ZONE 2,Zone Outdoor Air Drybulb Temperature [C] !TimeStep
+9,1,THERMAL ZONE 3,Zone Outdoor Air Drybulb Temperature [C] !TimeStep
+360,1,THERMAL ZONE 1,Zone Electric Equipment Total Heating Energy [J] !Hourly
+361,1,THERMAL ZONE 2,Zone Electric Equipment Total Heating Energy [J] !Hourly
+362,1,THERMAL ZONE 3,Zone Electric Equipment Total Heating Energy [J] !Hourly
+363,1,THERMAL ZONE 1,Zone Operative Temperature [C] !TimeStep
+364,1,THERMAL ZONE 2,Zone Operative Temperature [C] !TimeStep
+365,1,THERMAL ZONE 3,Zone Operative Temperature [C] !TimeStep
+366,1,THERMAL ZONE 1,Zone Air Temperature [C] !TimeStep
+367,1,THERMAL ZONE 1,Zone Air System Sensible Heating Energy [J] !TimeStep
+452,1,THERMAL ZONE 1,Zone Air System Sensible Cooling Energy [J] !TimeStep
+501,1,THERMAL ZONE 1,Zone Thermostat Heating Setpoint Temperature [C] !TimeStep
+502,1,THERMAL ZONE 1,Zone Thermostat Cooling Setpoint Temperature [C] !TimeStep
+503,1,THERMAL ZONE 2,Zone Air Temperature [C] !TimeStep
+504,1,THERMAL ZONE 2,Zone Air System Sensible Heating Energy [J] !TimeStep
+541,1,THERMAL ZONE 2,Zone Air System Sensible Cooling Energy [J] !TimeStep
+566,1,THERMAL ZONE 2,Zone Thermostat Heating Setpoint Temperature [C] !TimeStep
+567,1,THERMAL ZONE 2,Zone Thermostat Cooling Setpoint Temperature [C] !TimeStep
+568,1,THERMAL ZONE 3,Zone Air Temperature [C] !TimeStep
+569,1,THERMAL ZONE 3,Zone Air System Sensible Heating Energy [J] !TimeStep
+606,1,THERMAL ZONE 3,Zone Air System Sensible Cooling Energy [J] !TimeStep
+631,1,THERMAL ZONE 3,Zone Thermostat Heating Setpoint Temperature [C] !TimeStep
+632,1,THERMAL ZONE 3,Zone Thermostat Cooling Setpoint Temperature [C] !TimeStep

@@ -1,0 +1,163 @@
+Program Version,EnergyPlus, Version 23.1.0-87ed9199d4, YMD=2024.01.16 16:03
+! <Version>, Version ID
+ Version, 23.1
+! <Timesteps per Hour>, #TimeSteps, Minutes per TimeStep {minutes}
+ Timesteps per Hour,  6, 10
+! <System Convergence Limits>, Minimum System TimeStep {minutes}, Max HVAC Iterations, Minimum Plant Iterations, Maximum Plant Iterations
+ System Convergence Limits, 1, 20, 2, 8
+! <Simulation Control>, Do Zone Sizing, Do System Sizing, Do Plant Sizing, Do Design Days, Do Weather Simulation, Do HVAC Sizing Simulation
+ Simulation Control, No, No, No, Yes, Yes, No
+! <Performance Precision Tradeoffs>, Use Coil Direct Simulation, Zone Radiant Exchange Algorithm, Override Mode, Number of Timestep In Hour, Force Euler Method, Minimum Number of Warmup Days, Force Suppress All Begin Environment Resets, Minimum System Timestep, MaxZoneTempDiff, MaxAllowedDelTemp
+ Performance Precision Tradeoffs, No, ScriptF, Normal, 6, No, 1, No, 1.0, 0.300, 2.0000E-003
+! <Output Reporting Tolerances>, Tolerance for Time Heating Setpoint Not Met, Tolerance for Zone Cooling Setpoint Not Met Time
+ Output Reporting Tolerances, 0.200, 0.200, 
+! <Site:GroundTemperature:BuildingSurface>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:BuildingSurface,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00,  18.00
+! <Site:GroundTemperature:FCfactorMethod>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:FCfactorMethod,   0.14,  -1.08,   1.09,   4.49,  13.37,  20.22,  24.85,  26.25,  23.86,  18.53,  11.42,   4.82
+! <Site:GroundTemperature:Shallow>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Shallow,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00
+! <Site:GroundTemperature:Deep>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Deep,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00
+! <Site:GroundReflectance>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:SnowModifier>, Normal, Daylighting {dimensionless}
+ Site:GroundReflectance:SnowModifier,   1.000,   1.000
+! <Site:GroundReflectance:Snow>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:Snow:Daylighting>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow:Daylighting,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Environment:Weather Station>,Wind Sensor Height Above Ground {m},Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Sensor Height Above Ground {m},Wind Speed Modifier Coefficient-Internal,Temperature Modifier Coefficient-Internal
+Environment:Weather Station,10.000,0.140,270.000,1.500,1.586,9.750E-003
+! <Site:Location>, Location Name, Latitude {N+/S- Deg}, Longitude {E+/W- Deg},  Time Zone Number {GMT+/-}, Elevation {m},  Standard Pressure at Elevation {Pa}, Standard RhoAir at Elevation
+Site:Location,Beijing Beijing CHN CSWD WMO#=545110,39.80,116.47,8.00,31.30,100950,1.1998
+! <Site Water Mains Temperature Information>,Calculation Method{},Water Mains Temperature Schedule Name{},Annual Average Outdoor Air Temperature{C},Maximum Difference In Monthly Average Outdoor Air Temperatures{deltaC},Fixed Default Water Mains Temperature{C}
+Site Water Mains Temperature Information,FixedDefault,NA,NA,NA,10.0
+! <Building Information>, Building Name,North Axis {deg},Terrain,  Loads Convergence Tolerance Value,Temperature Convergence Tolerance Value,  Solar Distribution,Maximum Number of Warmup Days,Minimum Number of Warmup Days
+ Building Information,Building 1,0.000,Suburbs,4.00000E-002,0.40000,FullExterior,25,1
+! <Inside Convection Algorithm>, Algorithm {Simple | TARP | CeilingDiffuser | AdaptiveConvectionAlgorithm}
+Inside Convection Algorithm,TARP
+! <Outside Convection Algorithm>, Algorithm {SimpleCombined | TARP | MoWitt | DOE-2 | AdaptiveConvectionAlgorithm}
+Outside Convection Algorithm,DOE-2
+! <Sky Radiance Distribution>, Value {Anisotropic}
+Sky Radiance Distribution,Anisotropic
+! <Zone Air Solution Algorithm>, Algorithm {ThirdOrderBackwardDifference | AnalyticalSolution | EulerMethod}, Space Heat Balance Sizing, Space Heat Balance Simulation
+ Zone Air Solution Algorithm, ThirdOrderBackwardDifference, No, No
+! <Zone Air Carbon Dioxide Balance Simulation>, Simulation {Yes/No}, Carbon Dioxide Concentration
+ Zone Air Carbon Dioxide Balance Simulation, No,N/A
+! <Zone Air Generic Contaminant Balance Simulation>, Simulation {Yes/No}, Generic Contaminant Concentration
+ Zone Air Generic Contaminant Balance Simulation, No,N/A
+! <Zone Air Mass Flow Balance Simulation>, Enforce Mass Balance, Adjust Zone Mixing and Return {AdjustMixingOnly | AdjustReturnOnly | AdjustMixingThenReturn | AdjustReturnThenMixing | None}, Adjust Zone Infiltration {AddInfiltration | AdjustInfiltration | None}, Infiltration Zones {MixingSourceZonesOnly | AllZones}
+ Zone Air Mass Flow Balance Simulation, No,N/A,N/A,N/A
+! <HVACSystemRootFindingAlgorithm>, Value {RegulaFalsi | Bisection | BisectionThenRegulaFalsi | RegulaFalsiThenBisection}
+ HVACSystemRootFindingAlgorithm, RegulaFalsi
+! <Environment:Site Atmospheric Variation>,Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Gradient Coefficient {K/m}
+Environment:Site Atmospheric Variation,0.220,370.000,6.500000E-003
+! <Surface Geometry>,Starting Corner,Vertex Input Direction,Coordinate System,Daylight Reference Point Coordinate System,Rectangular (Simple) Surface Coordinate System
+ Surface Geometry,UpperLeftCorner,Counterclockwise,RelativeCoordinateSystem,RelativeCoordinateSystem,RelativeToZoneOrigin
+! <Surface Heat Transfer Algorithm>, Value {CTF - ConductionTransferFunction | EMPD - MoisturePenetrationDepthConductionTransferFunction | CondFD - ConductionFiniteDifference | HAMT - CombinedHeatAndMoistureFiniteElement} - Description,Inside Surface Max Temperature Limit{C}, Surface Convection Coefficient Lower Limit {W/m2-K}, Surface Convection Coefficient Upper Limit {W/m2-K}
+Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.0
+! <Shading Summary>, Number of Fixed Detached Shades, Number of Building Detached Shades, Number of Attached Shades
+ Shading Summary,0,0,0
+! <Zone Summary>, Number of Zones, Number of Zone Surfaces, Number of SubSurfaces
+ Zone Summary,3,183,58
+! <Zone Information>,Zone Name,North Axis {deg},Origin X-Coordinate {m},Origin Y-Coordinate {m},Origin Z-Coordinate {m},Centroid X-Coordinate {m},Centroid Y-Coordinate {m},Centroid Z-Coordinate {m},Type,Zone Multiplier,Zone List Multiplier,Minimum X {m},Maximum X {m},Minimum Y {m},Maximum Y {m},Minimum Z {m},Maximum Z {m},Ceiling Height {m},Volume {m3},Zone Inside Convection Algorithm {Simple-Detailed-CeilingDiffuser-TrombeWall},Zone Outside Convection Algorithm {Simple-Detailed-Tarp-MoWitt-DOE-2-BLAST}, Floor Area {m2},Exterior Gross Wall Area {m2},Exterior Net Wall Area {m2},Exterior Window Area {m2}, Number of Surfaces, Number of SubSurfaces, Number of Shading SubSurfaces,  Part of Total Building Area
+ Zone Information, THERMAL ZONE 1,0.0,-9.00,-18.00,0.00,-5.02,-14.27,1.50,1,1,1,-12.00,1.00,-18.00,-10.00,0.00,3.00,3.00,258.00,TARP,DOE-2,86.00,306.00,283.32,17.64,40,16,0,Yes
+ Zone Information, THERMAL ZONE 2,0.0,-9.00,-10.00,0.00,-5.54,-4.73,1.50,1,1,1,-12.00,0.00,-10.00,0.00,0.00,3.00,3.00,333.00,TARP,DOE-2,111.00,480.00,439.21,30.71,79,28,0,Yes
+ Zone Information, THERMAL ZONE 3,0.0,-9.00,-15.00,0.00,-10.50,-11.00,1.50,1,1,1,-12.00,-9.00,-15.00,-7.00,0.00,3.00,3.00,72.00,TARP,DOE-2,24.00,66.00,43.11,17.85,6,14,0,Yes
+! <Zone Internal Gains Nominal>,Zone Name, Floor Area {m2},# Occupants,Area per Occupant {m2/person},Occupant per Area {person/m2},Interior Lighting {W/m2},Electric Load {W/m2},Gas Load {W/m2},Other Load {W/m2},Hot Water Eq {W/m2},Steam Equipment {W/m2},Sum Loads per Area {W/m2},Outdoor Controlled Baseboard Heat
+ Zone Internal Gains Nominal, THERMAL ZONE 1,86.00,4.9,17.696,5.651E-002,10.656,7.642,0.000,0.000,0.000,0.000,18.299,No
+ Zone Internal Gains Nominal, THERMAL ZONE 2,111.00,6.3,17.696,5.651E-002,10.656,7.642,0.000,0.000,0.000,0.000,18.299,No
+ Zone Internal Gains Nominal, THERMAL ZONE 3,24.00,1.4,17.696,5.651E-002,10.656,7.642,0.000,0.000,0.000,0.000,18.299,No
+! <People Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Number of People {},People/Floor Area {person/m2},Floor Area per person {m2/person},Fraction Radiant,Fraction Convected,Sensible Fraction Calculation,Activity level,ASHRAE 55 Warnings,Carbon Dioxide Generation Rate,Nominal Minimum Number of People,Nominal Maximum Number of People
+ People Internal Gains Nominal, SPACE 101 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 1,86.00,4.9,0.5,5.914E-003,169.093,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 105 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 1,86.00,4.9,0.5,5.914E-003,169.093,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 103 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 1,86.00,4.9,1.4,1.577E-002,63.410,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 106 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 3,24.00,1.4,1.4,5.651E-002,17.696,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 107 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 1,86.00,4.9,1.1,1.314E-002,76.092,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 118 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.3,2.291E-003,436.497,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,0
+ People Internal Gains Nominal, SPACE 108 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.3,3.055E-003,327.373,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,0
+ People Internal Gains Nominal, SPACE 109 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.8,7.637E-003,130.949,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 111 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,1.2,1.069E-002,93.535,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 115 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.3,2.291E-003,436.497,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,0
+ People Internal Gains Nominal, SPACE 113 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.5,4.582E-003,218.248,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 112 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.3,3.055E-003,327.373,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,0
+ People Internal Gains Nominal, SPACE 114 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.3,3.055E-003,327.373,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,0
+ People Internal Gains Nominal, SPACE 116 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.3,2.291E-003,436.497,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,0
+ People Internal Gains Nominal, SPACE 117 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.3,2.291E-003,436.497,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,0
+ People Internal Gains Nominal, SPACE 119 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 1,86.00,4.9,0.7,7.885E-003,126.820,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 120 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.8,7.637E-003,130.949,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 121 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 1,86.00,4.9,0.7,7.885E-003,126.820,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+ People Internal Gains Nominal, SPACE 122 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 PEOPLE,OFFICE WORK OCC,THERMAL ZONE 2,111.00,6.3,0.8,7.637E-003,130.949,0.300,0.700,AutoCalculate,OFFICE ACTIVITY,No,3.8200E-008,0,1
+! <Lights Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Lighting Level {W},Lights/Floor Area {W/m2},Lights per person {W/person},Fraction Return Air,Fraction Radiant,Fraction Short Wave,Fraction Convected,Fraction Replaceable,End-Use Category,Nominal Minimum Lighting Level {W},Nominal Maximum Lighting Level {W}
+ Lights Internal Gains Nominal, SPACE 101 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 1,86.00,4.9,95.906,1.115,19.734,0.000,0.000,0.000,1.000,1.000,General,0.000,95.906
+ Lights Internal Gains Nominal, SPACE 105 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 1,86.00,4.9,95.906,1.115,19.734,0.000,0.000,0.000,1.000,1.000,General,0.000,95.906
+ Lights Internal Gains Nominal, SPACE 103 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 1,86.00,4.9,255.751,2.974,52.625,0.000,0.000,0.000,1.000,1.000,General,0.000,255.751
+ Lights Internal Gains Nominal, SPACE 106 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 3,24.00,1.4,255.751,10.656,188.571,0.000,0.000,0.000,1.000,1.000,General,0.000,255.751
+ Lights Internal Gains Nominal, SPACE 107 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 1,86.00,4.9,213.125,2.478,43.854,0.000,0.000,0.000,1.000,1.000,General,0.000,213.125
+ Lights Internal Gains Nominal, SPACE 118 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,47.953,0.432,7.645,0.000,0.000,0.000,1.000,1.000,General,0.000,47.953
+ Lights Internal Gains Nominal, SPACE 108 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,63.938,0.576,10.193,0.000,0.000,0.000,1.000,1.000,General,0.000,63.938
+ Lights Internal Gains Nominal, SPACE 109 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,159.844,1.440,25.483,0.000,0.000,0.000,1.000,1.000,General,0.000,159.844
+ Lights Internal Gains Nominal, SPACE 111 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,223.782,2.016,35.676,0.000,0.000,0.000,1.000,1.000,General,0.000,223.782
+ Lights Internal Gains Nominal, SPACE 115 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,47.953,0.432,7.645,0.000,0.000,0.000,1.000,1.000,General,0.000,47.953
+ Lights Internal Gains Nominal, SPACE 113 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,95.906,0.864,15.290,0.000,0.000,0.000,1.000,1.000,General,0.000,95.906
+ Lights Internal Gains Nominal, SPACE 112 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,63.938,0.576,10.193,0.000,0.000,0.000,1.000,1.000,General,0.000,63.938
+ Lights Internal Gains Nominal, SPACE 114 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,63.938,0.576,10.193,0.000,0.000,0.000,1.000,1.000,General,0.000,63.938
+ Lights Internal Gains Nominal, SPACE 116 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,47.953,0.432,7.645,0.000,0.000,0.000,1.000,1.000,General,0.000,47.953
+ Lights Internal Gains Nominal, SPACE 117 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,47.953,0.432,7.645,0.000,0.000,0.000,1.000,1.000,General,0.000,47.953
+ Lights Internal Gains Nominal, SPACE 119 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 1,86.00,4.9,127.875,1.487,26.312,0.000,0.000,0.000,1.000,1.000,General,0.000,127.875
+ Lights Internal Gains Nominal, SPACE 120 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,159.844,1.440,25.483,0.000,0.000,0.000,1.000,1.000,General,0.000,159.844
+ Lights Internal Gains Nominal, SPACE 121 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 1,86.00,4.9,127.875,1.487,26.312,0.000,0.000,0.000,1.000,1.000,General,0.000,127.875
+ Lights Internal Gains Nominal, SPACE 122 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 LIGHTS,OFFICE BLDG LIGHT,THERMAL ZONE 2,111.00,6.3,159.844,1.440,25.483,0.000,0.000,0.000,1.000,1.000,General,0.000,159.844
+! <ElectricEquipment Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Equipment Level {W},Equipment/Floor Area {W/m2},Equipment per person {W/person},Fraction Latent,Fraction Radiant,Fraction Lost,Fraction Convected,End-Use SubCategory,Nominal Minimum Equipment Level {W},Nominal Maximum Equipment Level {W}
+ ElectricEquipment Internal Gains Nominal, SPACE 101 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 1,86.00,4.9,68.781,0.800,14.153,0.000,0.000,0.000,1.000,General,0.000,68.781
+ ElectricEquipment Internal Gains Nominal, SPACE 105 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 1,86.00,4.9,68.781,0.800,14.153,0.000,0.000,0.000,1.000,General,0.000,68.781
+ ElectricEquipment Internal Gains Nominal, SPACE 103 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 1,86.00,4.9,183.417,2.133,37.741,0.000,0.000,0.000,1.000,General,0.000,183.417
+ ElectricEquipment Internal Gains Nominal, SPACE 106 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 3,24.00,1.4,183.417,7.642,135.238,0.000,0.000,0.000,1.000,General,0.000,183.417
+ ElectricEquipment Internal Gains Nominal, SPACE 107 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 1,86.00,4.9,152.848,1.777,31.451,0.000,0.000,0.000,1.000,General,0.000,152.848
+ ElectricEquipment Internal Gains Nominal, SPACE 118 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,34.391,0.310,5.483,0.000,0.000,0.000,1.000,General,0.000,34.391
+ ElectricEquipment Internal Gains Nominal, SPACE 108 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,45.854,0.413,7.310,0.000,0.000,0.000,1.000,General,0.000,45.854
+ ElectricEquipment Internal Gains Nominal, SPACE 109 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,114.636,1.033,18.275,0.000,0.000,0.000,1.000,General,0.000,114.636
+ ElectricEquipment Internal Gains Nominal, SPACE 111 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,160.490,1.446,25.586,0.000,0.000,0.000,1.000,General,0.000,160.490
+ ElectricEquipment Internal Gains Nominal, SPACE 115 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,34.391,0.310,5.483,0.000,0.000,0.000,1.000,General,0.000,34.391
+ ElectricEquipment Internal Gains Nominal, SPACE 113 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,68.781,0.620,10.965,0.000,0.000,0.000,1.000,General,0.000,68.781
+ ElectricEquipment Internal Gains Nominal, SPACE 112 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,45.854,0.413,7.310,0.000,0.000,0.000,1.000,General,0.000,45.854
+ ElectricEquipment Internal Gains Nominal, SPACE 114 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,45.854,0.413,7.310,0.000,0.000,0.000,1.000,General,0.000,45.854
+ ElectricEquipment Internal Gains Nominal, SPACE 116 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,34.391,0.310,5.483,0.000,0.000,0.000,1.000,General,0.000,34.391
+ ElectricEquipment Internal Gains Nominal, SPACE 117 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,34.391,0.310,5.483,0.000,0.000,0.000,1.000,General,0.000,34.391
+ ElectricEquipment Internal Gains Nominal, SPACE 119 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 1,86.00,4.9,91.709,1.066,18.870,0.000,0.000,0.000,1.000,General,0.000,91.709
+ ElectricEquipment Internal Gains Nominal, SPACE 120 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,114.636,1.033,18.275,0.000,0.000,0.000,1.000,General,0.000,114.636
+ ElectricEquipment Internal Gains Nominal, SPACE 121 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 1,86.00,4.9,91.709,1.066,18.870,0.000,0.000,0.000,1.000,General,0.000,91.709
+ ElectricEquipment Internal Gains Nominal, SPACE 122 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 ELECTRIC EQUIPMENT,OFFICE BLDG EQUIP,THERMAL ZONE 2,111.00,6.3,114.636,1.033,18.275,0.000,0.000,0.000,1.000,General,0.000,114.636
+! <Shadowing/Sun Position Calculations Annual Simulations>, Shading Calculation Method, Shading Calculation Update Frequency Method, Shading Calculation Update Frequency {days}, Maximum Figures in Shadow Overlap Calculations {}, Polygon Clipping Algorithm, Pixel Counting Resolution, Sky Diffuse Modeling Algorithm, Output External Shading Calculation Results, Disable Self-Shading Within Shading Zone Groups, Disable Self-Shading From Shading Zone Groups to Other Zones
+Shadowing/Sun Position Calculations Annual Simulations,PolygonClipping,Periodic,20,15000,SutherlandHodgman,512,SimpleSkyDiffuseModeling,No,No,No
+! <ZoneInfiltration Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s-m2},Volume Flow Rate/Exterior Surface Area {m3/s-m2},ACH - Air Changes per Hour,Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2}
+ ZoneInfiltration Airflow Stats Nominal, SPACE 101 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 1,86.00,4.9,1.020E-002,1.186E-004,2.568E-005,0.142,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 105 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 1,86.00,4.9,1.020E-002,1.186E-004,2.568E-005,0.142,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 103 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 1,86.00,4.9,2.039E-002,2.371E-004,5.136E-005,0.285,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 106 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 3,24.00,1.4,2.153E-002,8.972E-004,2.266E-004,1.077,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 107 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 1,86.00,4.9,1.791E-002,2.082E-004,4.510E-005,0.250,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 118 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,7.708E-003,6.944E-005,1.282E-005,8.333E-002,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 108 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,8.156E-003,7.348E-005,1.357E-005,8.818E-002,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 109 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,1.427E-002,1.286E-004,2.375E-005,0.154,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 111 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,1.835E-002,1.653E-004,3.053E-005,0.198,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 115 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,7.708E-003,6.944E-005,1.282E-005,8.333E-002,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 113 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,1.020E-002,9.185E-005,1.696E-005,0.110,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 112 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,8.156E-003,7.348E-005,1.357E-005,8.818E-002,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 114 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,8.156E-003,7.348E-005,1.357E-005,8.818E-002,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 116 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,7.708E-003,6.944E-005,1.282E-005,8.333E-002,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 117 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,7.708E-003,6.944E-005,1.282E-005,8.333E-002,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 119 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 1,86.00,4.9,1.563E-002,1.818E-004,3.937E-005,0.218,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 120 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,1.903E-002,1.715E-004,3.166E-005,0.206,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 121 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 1,86.00,4.9,1.563E-002,1.818E-004,3.937E-005,0.218,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE 122 189.1-2009 - OFFICE - OPENOFFICE - CZ4-8 INFILTRATION,OFFICE INFIL QUARTER ON,THERMAL ZONE 2,111.00,6.3,1.903E-002,1.715E-004,3.166E-005,0.206,1.000,0.000,0.000,0.000
+! <AirFlow Model>, Simple
+ AirFlow Model, Simple
+! <RoomAir Model>, Zone Name, Mixing/Mundt/UCSDDV/UCSDCV/UCSDUFI/UCSDUFE/User Defined
+RoomAir Model,THERMAL ZONE 1,Mixing/Well-Stirred
+RoomAir Model,THERMAL ZONE 2,Mixing/Well-Stirred
+RoomAir Model,THERMAL ZONE 3,Mixing/Well-Stirred
+! <AirflowNetwork Model:Control>, No Multizone or Distribution/Multizone with Distribution/Multizone without Distribution/Multizone with Distribution only during Fan Operation
+AirflowNetwork Model:Control,NoMultizoneOrDistribution
+! <Zone Volume Capacitance Multiplier>, Sensible Heat Capacity Multiplier, Moisture Capacity Multiplier, Carbon Dioxide Capacity Multiplier, Generic Contaminant Capacity Multiplier
+Zone Volume Capacitance Multiplier,   1.000 ,   1.000,   1.000,   1.000

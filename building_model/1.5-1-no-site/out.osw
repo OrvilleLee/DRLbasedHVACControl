@@ -1,0 +1,22 @@
+{
+   "completed_at" : "20240116T080353Z",
+   "completed_status" : "Fail",
+   "created_at" : "20240116T075619Z",
+   "current_step" : 0,
+   "eplusout_err" : "Program Version,EnergyPlus, Version 23.1.0-87ed9199d4, YMD=2024.01.16 16:03,\n   ** Warning ** CheckEnvironmentSpecifications: SimulationControl specified doing design day simulations, but no design environments specified.\n   **   ~~~   ** ...No design environment results produced. For these results, add appropriate SizingPeriod:* objects for your simulation.\n   ** Warning ** ProcessScheduleInput: Schedule:Constant=\"ALWAYS OFF DISCRETE\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** ProcessScheduleInput: Schedule:Constant=\"ALWAYS ON CONTINUOUS\", Blank Schedule Type Limits Name input -- will not be validated.\n   ** Warning ** GetHTSurfaceData: Surfaces with interface to Ground found but no \"Ground Temperatures\" were input.\n   **   ~~~   ** Found first in surface=SURFACE 14\n   **   ~~~   ** Defaults, constant throughout the year of (18.0) will be used.\n   ** Warning ** CalculateZoneVolume: 2 zones are not fully enclosed. For more details use:  Output:Diagnostics,DisplayExtrawarnings; \n   ** Warning ** CheckUsedConstructions: There are 21 nominally unused constructions in input.\n   **   ~~~   ** For explicit details on each unused construction, use Output:Diagnostics,DisplayExtraWarnings;\n   ** Severe  ** For autosizing of AirTerminal:SingleDuct:ParallelPIU:Reheat PARALLEL PIU ELEC RHT, a zone sizing run must be done.\n   **   ~~~   ** No \"Sizing:Zone\" objects were entered.\n   **   ~~~   ** The \"SimulationControl\" object did not have the field \"Do Zone Sizing Calculation\" set to Yes.\n   **  Fatal  ** Program terminates due to previously shown condition(s).\n   ...Summary of Errors that led to program termination:\n   ..... Reference severe error count=1\n   ..... Last severe error=For autosizing of AirTerminal:SingleDuct:ParallelPIU:Reheat PARALLEL PIU ELEC RHT, a zone sizing run must be done.\n   ************* Warning:  Node connection errors not checked - most system input has not been read (see previous warning).\n   ************* Fatal error -- final processing.  Program exited before simulations began.  See previous error messages.\n   *************\n   ************* ===== Final Error Summary =====\n   ************* The following error categories occurred.  Consider correcting or noting.\n   ************* Nominally Unused Constructions\n   ************* ..The nominally unused constructions warning is provided to alert you to potential conditions that can cause\n   ************* ..extra time during simulation. Each construction is calculated by the algorithm indicated in the HeatBalanceAlgorithm\n   ************* ..object. You may remove the constructions indicated (when you use the DisplayExtraWarnings option).\n   *************\n   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.\n   ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.\n   ************* EnergyPlus Terminated--Fatal Error Detected. 6 Warning; 1 Severe Errors; Elapsed Time=00hr 00min  0.19sec\n",
+   "file_paths" : 
+   [
+      "C:/Users/Lee/AppData/Local/Temp/osmodel-1705392197-0/resources/generated_files",
+      "./files",
+      "./weather",
+      "../../files",
+      "../../weather",
+      "./"
+   ],
+   "hash" : "167625C2",
+   "seed_file" : "../1.5-1-no-site.osm",
+   "started_at" : "20240116T080351Z",
+   "steps" : [],
+   "updated_at" : "20240116T080353Z",
+   "weather_file" : "CHN_Beijing.Beijing.545110_CSWD.epw"
+}

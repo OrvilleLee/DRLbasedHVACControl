@@ -1,0 +1,7 @@
+{
+   "created_at" : "20240116T083711Z",
+   "seed_file" : "../1.5-1-test-1.osm",
+   "steps" : [],
+   "updated_at" : "20240117T071308Z",
+   "weather_file" : "CHN_Beijing.Beijing.545110_CSWD.epw"
+}
