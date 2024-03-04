@@ -20,7 +20,7 @@ from osm2idf import osm2idf
 from data_center import Data_Center
 from plot import Drawing
 from agent import DQN
-from tools import HVAC_setting_value, ReplayBuffer
+from tools import HVAC_setting_value, ReplayBuffer, save_to_csv
 
 # Eplus_Dir = "D:/EnergyPlusV23-1-0"
 # sys.path.insert(0, Eplus_Dir)
@@ -71,8 +71,8 @@ def update_plot(draw):
 
 
 
-    draw.ax2.plot(DATA.x, DATA.Electricity_HVAC,
-                  label="Electricity_HVAC", color='red', linewidth=0.5)
+    # draw.ax2.plot(DATA.x, DATA.Electricity_HVAC,
+    #               label="Electricity_HVAC", color='red', linewidth=0.5)
     draw.ax2.plot(DATA.x, DATA.Electricity_Zone_1,
                   label="Electricity_Zone_1", color='#FF6347', linewidth=0.5)
 
@@ -165,7 +165,7 @@ def callback_function(EPstate):
             DATA.handle_Heating_Electricity  = api.exchange.get_meter_handle(EPstate, 'Heating:Electricity')
             DATA.handle_Cooling_Electricity  = api.exchange.get_meter_handle(EPstate, 'Cooling:Electricity')
 
-            DATA.handle_Electricity_Zone_1 = api.exchange.get_meter_handle(EPstate, 'Electricity:Zone:THERMAL ZONE 3')
+            DATA.handle_Electricity_Zone_1 = api.exchange.get_meter_handle(EPstate, 'Electricity:Zone:THERMAL ZONE 1')
 
 
 
@@ -538,17 +538,19 @@ if __name__ == '__main__':
     weather_Dir = "./weather_data/CHN_Beijing.Beijing.545110_CSWD.epw"
     out_Dir = "./out"
     IDF_Dir = "./building_model/new_ue_room/1-18/1.18.osm"
+    # IDF_Dir = "./sp/sp.osm"
     weights_Dir = "./weights"
     # IDF_Dir = "./building_model/1.5-1-no-site.osm"
 
     DATA = Data_Center()
-    DATA.train_switch = True
-    DATA.wear_out_flag = True
+    DATA.train_switch = False
+    DATA.wear_out_flag = False
     if not DATA.train_switch:
-        draw = Drawing(DATA, is_ion=False, is_zoom=True)
+        draw = Drawing(DATA, is_ion=False, is_zoom=False)
         run_instance = Run_EPlus(weather_Dir, out_Dir, IDF_Dir)
         run_instance.start_simulation(iscallback=True, isEPtoConsole=False)
         print(f'Total Energy consumption: {sum(DATA.Electricity_HVAC):.3f}J')
+        save_to_csv(DATA)
 
     else:
         '''DQN training'''

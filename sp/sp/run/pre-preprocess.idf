@@ -9838,259 +9838,39 @@ SizingPeriod:DesignDay,
   FullResetAtBeginEnvironment;            !- Begin Environment Reset Mode
 
 Output:Variable,
-  Environment,                            !- Key Value
-  Site Outdoor Air Drybulb Temperature,   !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 1,                         !- Key Value
-  Zone Mechanical Ventilation Mass,       !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 1,                         !- Key Value
-  Zone Mechanical Ventilation Mass Flow Rate, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 1,                         !- Key Value
+  *,                                      !- Key Value
   Zone Air Temperature,                   !- Variable Name
-  Timestep;                               !- Reporting Frequency
+  Hourly;                                 !- Reporting Frequency
 
 Output:Variable,
-  Thermal Zone 1,                         !- Key Value
-  Zone Mean Radiant Temperature,          !- Variable Name
-  Timestep;                               !- Reporting Frequency
+  *,                                      !- Key Value
+  Heating Coil Electricity Energy,        !- Variable Name
+  Hourly;                                 !- Reporting Frequency
 
 Output:Variable,
-  Thermal Zone 1,                         !- Key Value
-  Zone Thermostat Heating Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
+  *,                                      !- Key Value
+  Cooling Coil Electricity Energy,        !- Variable Name
+  Hourly;                                 !- Reporting Frequency
 
 Output:Variable,
-  Thermal Zone 1,                         !- Key Value
-  Zone Thermostat Cooling Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
+  *,                                      !- Key Value
+  Zone Outdoor Air Drybulb Temperature,   !- Variable Name
+  Hourly;                                 !- Reporting Frequency
 
 Output:Variable,
-  Thermal Zone 2,                         !- Key Value
+  *,                                      !- Key Value
+  Lights Electricity Energy,              !- Variable Name
+  Hourly;                                 !- Reporting Frequency
+
+Output:Variable,
+  *,                                      !- Key Value
+  Zone Lights Electricity Energy,         !- Variable Name
+  Hourly;                                 !- Reporting Frequency
+
+Output:Variable,
+  *,                                      !- Key Value
   Zone Air Relative Humidity,             !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 2,                         !- Key Value
-  Zone Windows Total Heat Gain Energy,    !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 2,                         !- Key Value
-  Zone Infiltration Mass,                 !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 2,                         !- Key Value
-  Zone Mechanical Ventilation Mass,       !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Environment,                            !- Key Value
-  Site Wind Speed,                        !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 2,                         !- Key Value
-  Zone Mechanical Ventilation Mass Flow Rate, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 2,                         !- Key Value
-  Zone Air Temperature,                   !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 2,                         !- Key Value
-  Zone Mean Radiant Temperature,          !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 2,                         !- Key Value
-  Zone Thermostat Heating Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 2,                         !- Key Value
-  Zone Thermostat Cooling Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 3,                         !- Key Value
-  Zone Air Relative Humidity,             !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 3,                         !- Key Value
-  Zone Windows Total Heat Gain Energy,    !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 3,                         !- Key Value
-  Zone Infiltration Mass,                 !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 3,                         !- Key Value
-  Zone Mechanical Ventilation Mass,       !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 3,                         !- Key Value
-  Zone Mechanical Ventilation Mass Flow Rate, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Environment,                            !- Key Value
-  Site Wind Direction,                    !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 3,                         !- Key Value
-  Zone Air Temperature,                   !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 3,                         !- Key Value
-  Zone Mean Radiant Temperature,          !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 3,                         !- Key Value
-  Zone Thermostat Heating Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 3,                         !- Key Value
-  Zone Thermostat Cooling Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 4,                         !- Key Value
-  Zone Air Relative Humidity,             !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 4,                         !- Key Value
-  Zone Windows Total Heat Gain Energy,    !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 4,                         !- Key Value
-  Zone Infiltration Mass,                 !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 4,                         !- Key Value
-  Zone Mechanical Ventilation Mass,       !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 4,                         !- Key Value
-  Zone Mechanical Ventilation Mass Flow Rate, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 4,                         !- Key Value
-  Zone Air Temperature,                   !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Environment,                            !- Key Value
-  Site Solar Azimuth Angle,               !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 4,                         !- Key Value
-  Zone Mean Radiant Temperature,          !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 4,                         !- Key Value
-  Zone Thermostat Heating Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 4,                         !- Key Value
-  Zone Thermostat Cooling Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 5,                         !- Key Value
-  Zone Air Relative Humidity,             !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 5,                         !- Key Value
-  Zone Windows Total Heat Gain Energy,    !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 5,                         !- Key Value
-  Zone Infiltration Mass,                 !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 5,                         !- Key Value
-  Zone Mechanical Ventilation Mass,       !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 5,                         !- Key Value
-  Zone Mechanical Ventilation Mass Flow Rate, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 5,                         !- Key Value
-  Zone Air Temperature,                   !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 5,                         !- Key Value
-  Zone Mean Radiant Temperature,          !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Environment,                            !- Key Value
-  Site Solar Altitude Angle,              !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 5,                         !- Key Value
-  Zone Thermostat Heating Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 5,                         !- Key Value
-  Zone Thermostat Cooling Setpoint Temperature, !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Environment,                            !- Key Value
-  Site Solar Hour Angle,                  !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 1,                         !- Key Value
-  Zone Air Relative Humidity,             !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 1,                         !- Key Value
-  Zone Windows Total Heat Gain Energy,    !- Variable Name
-  Timestep;                               !- Reporting Frequency
-
-Output:Variable,
-  Thermal Zone 1,                         !- Key Value
-  Zone Infiltration Mass,                 !- Variable Name
-  Timestep;                               !- Reporting Frequency
+  Hourly;                                 !- Reporting Frequency
 
 OutputControl:Table:Style,
   HTML;                                   !- Column Separator
