@@ -543,7 +543,7 @@ if __name__ == '__main__':
 
     DATA = Data_Center()
     DATA.train_switch = True
-    DATA.wear_out_flag = False
+    DATA.wear_out_flag = True
     if not DATA.train_switch:
         draw = Drawing(DATA, is_ion=False, is_zoom=True)
         run_instance = Run_EPlus(weather_Dir, out_Dir, IDF_Dir)
