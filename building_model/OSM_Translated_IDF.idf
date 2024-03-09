@@ -3,7 +3,7 @@ Version,
   23.1;                                   !- Version Identifier
 
 Timestep,
-  1;                                      !- Number of Timesteps per Hour
+  12;                                     !- Number of Timesteps per Hour
 
 LifeCycleCost:Parameters,
   Life Cycle Cost Parameters,             !- Name
@@ -1330,60 +1330,8 @@ ScheduleTypeLimits,
 
 ThermostatSetpoint:DualSetpoint,
   Thermostat Setpoint Dual Setpoint 1,    !- Name
-  HAVC-Heating,                           !- Heating Setpoint Temperature Schedule Name
-  HAVC-Cooling;                           !- Cooling Setpoint Temperature Schedule Name
-
-ScheduleTypeLimits,
-  Temperature 5,                          !- Name
-  ,                                       !- Lower Limit Value {BasedOnField A3}
-  ,                                       !- Upper Limit Value {BasedOnField A3}
-  Continuous,                             !- Numeric Type
-  temperature;                            !- Unit Type
-
-Schedule:Day:Interval,
-  Large Office ClgSetp Default Schedule 1, !- Name
-  Temperature 5,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  18;                                     !- Value Until Time 1
-
-Schedule:Week:Daily,
-  HAVC-Heating Week Rule - Jan1-Dec31,    !- Name
-  Large Office ClgSetp Default Schedule 1, !- Sunday Schedule:Day Name
-  Large Office ClgSetp Default Schedule 1, !- Monday Schedule:Day Name
-  Large Office ClgSetp Default Schedule 1, !- Tuesday Schedule:Day Name
-  Large Office ClgSetp Default Schedule 1, !- Wednesday Schedule:Day Name
-  Large Office ClgSetp Default Schedule 1, !- Thursday Schedule:Day Name
-  Large Office ClgSetp Default Schedule 1, !- Friday Schedule:Day Name
-  Large Office ClgSetp Default Schedule 1, !- Saturday Schedule:Day Name
-  Large Office ClgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office ClgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office ClgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office ClgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office ClgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Year,
-  HAVC-Heating,                           !- Name
-  Temperature 5,                          !- Schedule Type Limits Name
-  HAVC-Heating Week Rule - Jan1-Dec31,    !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
-
-Schedule:Day:Interval,
-  Large Office ClgSetp Summer Design Day 1, !- Name
-  Temperature 5,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  15;                                     !- Value Until Time 1
-
-Schedule:Day:Interval,
-  Large Office ClgSetp Winter Design Day 1, !- Name
-  Temperature 5,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  17;                                     !- Value Until Time 1
+  HAVC-HOT,                               !- Heating Setpoint Temperature Schedule Name
+  HAVC-COOL;                              !- Cooling Setpoint Temperature Schedule Name
 
 ScheduleTypeLimits,
   Temperature 3,                          !- Name
@@ -1399,274 +1347,8 @@ Schedule:Day:Interval,
   24:00,                                  !- Time 1 {hh:mm}
   24;                                     !- Value Until Time 1
 
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 14, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  24;                                     !- Value Until Time 1
-
 Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jan1-May27,    !- Name
-  Large Office HtgSetp Default Schedule 1, !- Sunday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Monday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Tuesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Wednesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Thursday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Friday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - May28-Jun3,    !- Name
-  Large Office HtgSetp Default Schedule 1, !- Sunday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Monday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Tuesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Wednesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 14, !- Thursday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 14, !- Friday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 14, !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 12, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  23;                                     !- Value Until Time 1
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jun4-Jun10,    !- Name
-  Large Office HtgSetp Default Schedule 14, !- Sunday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 14, !- Monday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 14, !- Tuesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 14, !- Wednesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 14, !- Thursday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 14, !- Friday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 14, !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 10, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  22;                                     !- Value Until Time 1
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jun11-Jun17,   !- Name
-  Large Office HtgSetp Default Schedule 12, !- Sunday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 12, !- Monday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 12, !- Tuesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 12, !- Wednesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 12, !- Thursday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 12, !- Friday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 12, !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 16, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  21;                                     !- Value Until Time 1
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jun18-Jun24,   !- Name
-  Large Office HtgSetp Default Schedule 12, !- Sunday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 12, !- Monday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 12, !- Tuesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 10, !- Wednesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 10, !- Thursday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 10, !- Friday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 10, !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jun25-Jul1,    !- Name
-  Large Office HtgSetp Default Schedule 10, !- Sunday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 10, !- Monday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 10, !- Tuesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 10, !- Wednesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 10, !- Thursday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 10, !- Friday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 16, !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Day:Interval,
-  Schedule Day 4,                         !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  20;                                     !- Value Until Time 1
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jul2-Jul8,     !- Name
-  Large Office HtgSetp Default Schedule 16, !- Sunday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 16, !- Monday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 16, !- Tuesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 16, !- Wednesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 16, !- Thursday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 16, !- Friday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 16, !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Day:Interval,
-  Schedule Day 5,                         !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  21;                                     !- Value Until Time 1
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jul9-Jul15,    !- Name
-  Large Office HtgSetp Default Schedule 16, !- Sunday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 16, !- Monday Schedule:Day Name
-  Schedule Day 4,                         !- Tuesday Schedule:Day Name
-  Schedule Day 4,                         !- Wednesday Schedule:Day Name
-  Schedule Day 4,                         !- Thursday Schedule:Day Name
-  Schedule Day 4,                         !- Friday Schedule:Day Name
-  Schedule Day 4,                         !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jul16-Jul22,   !- Name
-  Schedule Day 4,                         !- Sunday Schedule:Day Name
-  Schedule Day 4,                         !- Monday Schedule:Day Name
-  Schedule Day 4,                         !- Tuesday Schedule:Day Name
-  Schedule Day 4,                         !- Wednesday Schedule:Day Name
-  Schedule Day 4,                         !- Thursday Schedule:Day Name
-  Schedule Day 5,                         !- Friday Schedule:Day Name
-  Schedule Day 5,                         !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Day:Interval,
-  Schedule Day 6,                         !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  22;                                     !- Value Until Time 1
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jul23-Jul29,   !- Name
-  Schedule Day 5,                         !- Sunday Schedule:Day Name
-  Schedule Day 5,                         !- Monday Schedule:Day Name
-  Schedule Day 5,                         !- Tuesday Schedule:Day Name
-  Schedule Day 5,                         !- Wednesday Schedule:Day Name
-  Schedule Day 5,                         !- Thursday Schedule:Day Name
-  Schedule Day 5,                         !- Friday Schedule:Day Name
-  Schedule Day 5,                         !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Day:Interval,
-  Schedule Day 8,                         !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  23;                                     !- Value Until Time 1
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Jul30-Aug5,    !- Name
-  Schedule Day 5,                         !- Sunday Schedule:Day Name
-  Schedule Day 5,                         !- Monday Schedule:Day Name
-  Schedule Day 6,                         !- Tuesday Schedule:Day Name
-  Schedule Day 6,                         !- Wednesday Schedule:Day Name
-  Schedule Day 6,                         !- Thursday Schedule:Day Name
-  Schedule Day 6,                         !- Friday Schedule:Day Name
-  Schedule Day 6,                         !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Aug6-Aug12,    !- Name
-  Schedule Day 6,                         !- Sunday Schedule:Day Name
-  Schedule Day 6,                         !- Monday Schedule:Day Name
-  Schedule Day 6,                         !- Tuesday Schedule:Day Name
-  Schedule Day 6,                         !- Wednesday Schedule:Day Name
-  Schedule Day 6,                         !- Thursday Schedule:Day Name
-  Schedule Day 8,                         !- Friday Schedule:Day Name
-  Schedule Day 8,                         !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Aug13-Aug19,   !- Name
-  Schedule Day 8,                         !- Sunday Schedule:Day Name
-  Schedule Day 8,                         !- Monday Schedule:Day Name
-  Schedule Day 8,                         !- Tuesday Schedule:Day Name
-  Schedule Day 8,                         !- Wednesday Schedule:Day Name
-  Schedule Day 8,                         !- Thursday Schedule:Day Name
-  Schedule Day 8,                         !- Friday Schedule:Day Name
-  Schedule Day 8,                         !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Aug20-Aug26,   !- Name
-  Schedule Day 8,                         !- Sunday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Monday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Tuesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Wednesday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Thursday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Friday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Saturday Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- Holiday Schedule:Day Name
-  Large Office HtgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
-  Large Office HtgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
-  Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
-
-Schedule:Week:Daily,
-  HAVC-Cooling Week Rule - Aug27-Dec31,   !- Name
+  HAVC-HOT Week Rule - Jan1-Dec31,        !- Name
   Large Office HtgSetp Default Schedule 1, !- Sunday Schedule:Day Name
   Large Office HtgSetp Default Schedule 1, !- Monday Schedule:Day Name
   Large Office HtgSetp Default Schedule 1, !- Tuesday Schedule:Day Name
@@ -1681,97 +1363,129 @@ Schedule:Week:Daily,
   Large Office HtgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  HAVC-Cooling,                           !- Name
+  HAVC-HOT,                               !- Name
   Temperature 3,                          !- Schedule Type Limits Name
-  HAVC-Cooling Week Rule - Jan1-May27,    !- Schedule:Week Name 1
+  HAVC-HOT Week Rule - Jan1-Dec31,        !- Schedule:Week Name 1
   1,                                      !- Start Month 1
   1,                                      !- Start Day 1
-  5,                                      !- End Month 1
-  27,                                     !- End Day 1
-  HAVC-Cooling Week Rule - May28-Jun3,    !- Schedule:Week Name 2
-  5,                                      !- Start Month 2
-  28,                                     !- Start Day 2
-  6,                                      !- End Month 2
-  3,                                      !- End Day 2
-  HAVC-Cooling Week Rule - Jun4-Jun10,    !- Schedule:Week Name 3
-  6,                                      !- Start Month 3
-  4,                                      !- Start Day 3
-  6,                                      !- End Month 3
-  10,                                     !- End Day 3
-  HAVC-Cooling Week Rule - Jun11-Jun17,   !- Schedule:Week Name 4
-  6,                                      !- Start Month 4
-  11,                                     !- Start Day 4
-  6,                                      !- End Month 4
-  17,                                     !- End Day 4
-  HAVC-Cooling Week Rule - Jun18-Jun24,   !- Schedule:Week Name 5
-  6,                                      !- Start Month 5
-  18,                                     !- Start Day 5
-  6,                                      !- End Month 5
-  24,                                     !- End Day 5
-  HAVC-Cooling Week Rule - Jun25-Jul1,    !- Schedule:Week Name 6
-  6,                                      !- Start Month 6
-  25,                                     !- Start Day 6
-  7,                                      !- End Month 6
-  1,                                      !- End Day 6
-  HAVC-Cooling Week Rule - Jul2-Jul8,     !- Schedule:Week Name 7
-  7,                                      !- Start Month 7
-  2,                                      !- Start Day 7
-  7,                                      !- End Month 7
-  8,                                      !- End Day 7
-  HAVC-Cooling Week Rule - Jul9-Jul15,    !- Schedule:Week Name 8
-  7,                                      !- Start Month 8
-  9,                                      !- Start Day 8
-  7,                                      !- End Month 8
-  15,                                     !- End Day 8
-  HAVC-Cooling Week Rule - Jul16-Jul22,   !- Schedule:Week Name 9
-  7,                                      !- Start Month 9
-  16,                                     !- Start Day 9
-  7,                                      !- End Month 9
-  22,                                     !- End Day 9
-  HAVC-Cooling Week Rule - Jul23-Jul29,   !- Schedule:Week Name 10
-  7,                                      !- Start Month 10
-  23,                                     !- Start Day 10
-  7,                                      !- End Month 10
-  29,                                     !- End Day 10
-  HAVC-Cooling Week Rule - Jul30-Aug5,    !- Schedule:Week Name 11
-  7,                                      !- Start Month 11
-  30,                                     !- Start Day 11
-  8,                                      !- End Month 11
-  5,                                      !- End Day 11
-  HAVC-Cooling Week Rule - Aug6-Aug12,    !- Schedule:Week Name 12
-  8,                                      !- Start Month 12
-  6,                                      !- Start Day 12
-  8,                                      !- End Month 12
-  12,                                     !- End Day 12
-  HAVC-Cooling Week Rule - Aug13-Aug19,   !- Schedule:Week Name 13
-  8,                                      !- Start Month 13
-  13,                                     !- Start Day 13
-  8,                                      !- End Month 13
-  19,                                     !- End Day 13
-  HAVC-Cooling Week Rule - Aug20-Aug26,   !- Schedule:Week Name 14
-  8,                                      !- Start Month 14
-  20,                                     !- Start Day 14
-  8,                                      !- End Month 14
-  26,                                     !- End Day 14
-  HAVC-Cooling Week Rule - Aug27-Dec31,   !- Schedule:Week Name 15
-  8,                                      !- Start Month 15
-  27,                                     !- Start Day 15
-  12,                                     !- End Month 15
-  31;                                     !- End Day 15
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
 
 Schedule:Day:Interval,
   Large Office HtgSetp Summer Design Day 1, !- Name
   Temperature 3,                          !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  18;                                     !- Value Until Time 1
+  17.1296904761905;                       !- Value Until Time 1
 
 Schedule:Day:Interval,
   Large Office HtgSetp Winter Design Day 1, !- Name
   Temperature 3,                          !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
+  04:00,                                  !- Time 1 {hh:mm}
+  18.0462222222222,                       !- Value Until Time 1
+  22:00,                                  !- Time 2 {hh:mm}
+  21,                                     !- Value Until Time 2
+  24:00,                                  !- Time 3 {hh:mm}
+  18.50775;                               !- Value Until Time 3
+
+Schedule:Day:Interval,
+  Schedule Day 4,                         !- Name
+  Temperature 3,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  18;                                     !- Value Until Time 1
+  22;                                     !- Value Until Time 1
+
+Schedule:Day:Interval,
+  Large Office HtgSetp Rule 1 Day Schedule 1, !- Name
+  Temperature 3,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  26;                                     !- Value Until Time 1
+
+Schedule:Day:Interval,
+  Large Office HtgSetp Rule 2 Day Schedule 1, !- Name
+  Temperature 3,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  26;                                     !- Value Until Time 1
+
+ScheduleTypeLimits,
+  Temperature 5,                          !- Name
+  ,                                       !- Lower Limit Value {BasedOnField A3}
+  ,                                       !- Upper Limit Value {BasedOnField A3}
+  Continuous,                             !- Numeric Type
+  temperature;                            !- Unit Type
+
+Schedule:Day:Interval,
+  Large Office ClgSetp Default Schedule 1, !- Name
+  Temperature 5,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  26;                                     !- Value Until Time 1
+
+Schedule:Week:Daily,
+  HAVC-COOL Week Rule - Jan1-Dec31,       !- Name
+  Large Office ClgSetp Default Schedule 1, !- Sunday Schedule:Day Name
+  Large Office ClgSetp Default Schedule 1, !- Monday Schedule:Day Name
+  Large Office ClgSetp Default Schedule 1, !- Tuesday Schedule:Day Name
+  Large Office ClgSetp Default Schedule 1, !- Wednesday Schedule:Day Name
+  Large Office ClgSetp Default Schedule 1, !- Thursday Schedule:Day Name
+  Large Office ClgSetp Default Schedule 1, !- Friday Schedule:Day Name
+  Large Office ClgSetp Default Schedule 1, !- Saturday Schedule:Day Name
+  Large Office ClgSetp Default Schedule 1, !- Holiday Schedule:Day Name
+  Large Office ClgSetp Summer Design Day 1, !- SummerDesignDay Schedule:Day Name
+  Large Office ClgSetp Winter Design Day 1, !- WinterDesignDay Schedule:Day Name
+  Large Office ClgSetp Default Schedule 1, !- CustomDay1 Schedule:Day Name
+  Large Office ClgSetp Default Schedule 1; !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  HAVC-COOL,                              !- Name
+  Temperature 5,                          !- Schedule Type Limits Name
+  HAVC-COOL Week Rule - Jan1-Dec31,       !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Day:Interval,
+  Large Office ClgSetp Summer Design Day 1, !- Name
+  Temperature 5,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  06:00,                                  !- Time 1 {hh:mm}
+  26.7,                                   !- Value Until Time 1
+  22:00,                                  !- Time 2 {hh:mm}
+  21.4188035714286,                       !- Value Until Time 2
+  24:00,                                  !- Time 3 {hh:mm}
+  26.7;                                   !- Value Until Time 3
+
+Schedule:Day:Interval,
+  Large Office ClgSetp Winter Design Day 1, !- Name
+  Temperature 5,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  26.7;                                   !- Value Until Time 1
+
+Schedule:Day:Interval,
+  Schedule Day 3,                         !- Name
+  Temperature 5,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  28;                                     !- Value Until Time 1
+
+Schedule:Day:Interval,
+  Schedule Day 2,                         !- Name
+  Temperature 5,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  24;                                     !- Value Until Time 1
+
+Schedule:Day:Interval,
+  Schedule Day 1,                         !- Name
+  Temperature 5,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  28;                                     !- Value Until Time 1
 
 ZoneHVAC:EquipmentConnections,
   Thermal Zone 1,                         !- Zone Name
@@ -1838,7 +1552,7 @@ Schedule:Day:Interval,
   08:00,                                  !- Time 1 {hh:mm}
   0,                                      !- Value Until Time 1
   21:00,                                  !- Time 2 {hh:mm}
-  0.85,                                   !- Value Until Time 2
+  1,                                      !- Value Until Time 2
   24:00,                                  !- Time 3 {hh:mm}
   0;                                      !- Value Until Time 3
 
@@ -3726,8 +3440,8 @@ ScheduleTypeLimits,
 
 ThermostatSetpoint:DualSetpoint,
   Thermostat Setpoint Dual Setpoint 2,    !- Name
-  HAVC-Heating,                           !- Heating Setpoint Temperature Schedule Name
-  HAVC-Cooling;                           !- Cooling Setpoint Temperature Schedule Name
+  HAVC-HOT,                               !- Heating Setpoint Temperature Schedule Name
+  HAVC-COOL;                              !- Cooling Setpoint Temperature Schedule Name
 
 ZoneHVAC:EquipmentConnections,
   Thermal Zone 2,                         !- Zone Name
@@ -4307,8 +4021,8 @@ ScheduleTypeLimits,
 
 ThermostatSetpoint:DualSetpoint,
   Thermostat Setpoint Dual Setpoint 3,    !- Name
-  HAVC-Heating,                           !- Heating Setpoint Temperature Schedule Name
-  HAVC-Cooling;                           !- Cooling Setpoint Temperature Schedule Name
+  HAVC-HOT,                               !- Heating Setpoint Temperature Schedule Name
+  HAVC-COOL;                              !- Cooling Setpoint Temperature Schedule Name
 
 ZoneHVAC:EquipmentConnections,
   Thermal Zone 3,                         !- Zone Name
@@ -4897,8 +4611,8 @@ ScheduleTypeLimits,
 
 ThermostatSetpoint:DualSetpoint,
   Thermostat Setpoint Dual Setpoint 4,    !- Name
-  HAVC-Heating,                           !- Heating Setpoint Temperature Schedule Name
-  HAVC-Cooling;                           !- Cooling Setpoint Temperature Schedule Name
+  HAVC-HOT,                               !- Heating Setpoint Temperature Schedule Name
+  HAVC-COOL;                              !- Cooling Setpoint Temperature Schedule Name
 
 ZoneHVAC:EquipmentConnections,
   Thermal Zone 4,                         !- Zone Name
@@ -5506,8 +5220,8 @@ ScheduleTypeLimits,
 
 ThermostatSetpoint:DualSetpoint,
   Thermostat Setpoint Dual Setpoint 5,    !- Name
-  HAVC-Heating,                           !- Heating Setpoint Temperature Schedule Name
-  HAVC-Cooling;                           !- Cooling Setpoint Temperature Schedule Name
+  HAVC-HOT,                               !- Heating Setpoint Temperature Schedule Name
+  HAVC-COOL;                              !- Cooling Setpoint Temperature Schedule Name
 
 ZoneHVAC:EquipmentConnections,
   Thermal Zone 5,                         !- Zone Name
@@ -5669,13 +5383,13 @@ HeatBalanceAlgorithm,
 
 RunPeriod,
   Run Period 1,                           !- Name
-  6,                                      !- Begin Month
+  1,                                      !- Begin Month
   1,                                      !- Begin Day of Month
   2006,                                   !- Begin Year
-  8,                                      !- End Month
+  12,                                     !- End Month
   31,                                     !- End Day of Month
   2006,                                   !- End Year
-  Thursday,                               !- Day of Week for Start Day
+  Sunday,                                 !- Day of Week for Start Day
   No,                                     !- Use Weather File Holidays and Special Days
   No,                                     !- Use Weather File Daylight Saving Period
   No,                                     !- Apply Weekend Holiday Rule
@@ -6364,71 +6078,10 @@ ScheduleTypeLimits,
   availability;                           !- Unit Type
 
 ScheduleTypeLimits,
-  Capacity,                               !- Name
-  0,                                      !- Lower Limit Value {BasedOnField A3}
-  ,                                       !- Upper Limit Value {BasedOnField A3}
-  Continuous,                             !- Numeric Type
-  capacity;                               !- Unit Type
-
-ScheduleTypeLimits,
-  Any Number;                             !- Name
-
-ScheduleTypeLimits,
-  DeltaTemperature,                       !- Name
-  ,                                       !- Lower Limit Value {BasedOnField A3}
-  ,                                       !- Upper Limit Value {BasedOnField A3}
-  Continuous,                             !- Numeric Type
-  deltatemperature;                       !- Unit Type
-
-ScheduleTypeLimits,
-  Dimensionless,                          !- Name
-  ,                                       !- Lower Limit Value {BasedOnField A3}
-  ,                                       !- Upper Limit Value {BasedOnField A3}
-  Continuous;                             !- Numeric Type
-
-ScheduleTypeLimits,
-  Dimensionless 1,                        !- Name
-  -1,                                     !- Lower Limit Value {BasedOnField A3}
-  1,                                      !- Upper Limit Value {BasedOnField A3}
-  Continuous;                             !- Numeric Type
-
-ScheduleTypeLimits,
-  Dimensionless 2,                        !- Name
-  0,                                      !- Lower Limit Value {BasedOnField A3}
-  ,                                       !- Upper Limit Value {BasedOnField A3}
-  Continuous;                             !- Numeric Type
-
-ScheduleTypeLimits,
-  Dimensionless 3,                        !- Name
-  0.1,                                    !- Lower Limit Value {BasedOnField A3}
-  1000,                                   !- Upper Limit Value {BasedOnField A3}
-  Continuous;                             !- Numeric Type
-
-ScheduleTypeLimits,
-  Dimensionless 4,                        !- Name
-  0,                                      !- Lower Limit Value {BasedOnField A3}
-  1,                                      !- Upper Limit Value {BasedOnField A3}
-  Continuous,                             !- Numeric Type
-  dimensionless;                          !- Unit Type
-
-ScheduleTypeLimits,
   Fractional,                             !- Name
   0,                                      !- Lower Limit Value {BasedOnField A3}
   1,                                      !- Upper Limit Value {BasedOnField A3}
   Continuous;                             !- Numeric Type
-
-ScheduleTypeLimits,
-  Integer,                                !- Name
-  0,                                      !- Lower Limit Value {BasedOnField A3}
-  4,                                      !- Upper Limit Value {BasedOnField A3}
-  Discrete;                               !- Numeric Type
-
-ScheduleTypeLimits,
-  OnOff,                                  !- Name
-  0,                                      !- Lower Limit Value {BasedOnField A3}
-  1,                                      !- Upper Limit Value {BasedOnField A3}
-  Discrete,                               !- Numeric Type
-  availability;                           !- Unit Type
 
 ScheduleTypeLimits,
   OnOff hvac_library,                     !- Name
@@ -6436,20 +6089,6 @@ ScheduleTypeLimits,
   1,                                      !- Upper Limit Value {BasedOnField A3}
   Discrete,                               !- Numeric Type
   availability;                           !- Unit Type
-
-ScheduleTypeLimits,
-  Percent,                                !- Name
-  0,                                      !- Lower Limit Value {BasedOnField A3}
-  100,                                    !- Upper Limit Value {BasedOnField A3}
-  Continuous,                             !- Numeric Type
-  percent;                                !- Unit Type
-
-ScheduleTypeLimits,
-  Temperature,                            !- Name
-  ,                                       !- Lower Limit Value {BasedOnField A3}
-  0,                                      !- Upper Limit Value {BasedOnField A3}
-  Continuous,                             !- Numeric Type
-  temperature;                            !- Unit Type
 
 ScheduleTypeLimits,
   Temperature 11,                         !- Name
@@ -6473,32 +6112,11 @@ ScheduleTypeLimits,
   temperature;                            !- Unit Type
 
 ScheduleTypeLimits,
-  Temperature 38,                         !- Name
-  0,                                      !- Lower Limit Value {BasedOnField A3}
-  ,                                       !- Upper Limit Value {BasedOnField A3}
-  Continuous,                             !- Numeric Type
-  temperature;                            !- Unit Type
-
-ScheduleTypeLimits,
-  Temperature 39,                         !- Name
-  0,                                      !- Lower Limit Value {BasedOnField A3}
-  100,                                    !- Upper Limit Value {BasedOnField A3}
-  Continuous,                             !- Numeric Type
-  temperature;                            !- Unit Type
-
-ScheduleTypeLimits,
   Temperature 4,                          !- Name
   ,                                       !- Lower Limit Value {BasedOnField A3}
   ,                                       !- Upper Limit Value {BasedOnField A3}
   Continuous,                             !- Numeric Type
   temperature;                            !- Unit Type
-
-ScheduleTypeLimits,
-  Velocity,                               !- Name
-  0,                                      !- Lower Limit Value {BasedOnField A3}
-  ,                                       !- Upper Limit Value {BasedOnField A3}
-  Continuous,                             !- Numeric Type
-  velocity;                               !- Unit Type
 
 Schedule:Constant,
   Always On Discrete 1,                   !- Name
@@ -6810,94 +6428,6 @@ Schedule:Day:Interval,
   21,                                     !- Value Until Time 2
   24:00,                                  !- Time 3 {hh:mm}
   15.6;                                   !- Value Until Time 3
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 11, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  20,                                     !- Value Until Time 1
-  22:00,                                  !- Time 2 {hh:mm}
-  28,                                     !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  20;                                     !- Value Until Time 3
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 13, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  20,                                     !- Value Until Time 1
-  22:00,                                  !- Time 2 {hh:mm}
-  24,                                     !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  20;                                     !- Value Until Time 3
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 15, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  20,                                     !- Value Until Time 1
-  22:00,                                  !- Time 2 {hh:mm}
-  24,                                     !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  20;                                     !- Value Until Time 3
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 2, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  20,                                     !- Value Until Time 1
-  22:00,                                  !- Time 2 {hh:mm}
-  28,                                     !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  20;                                     !- Value Until Time 3
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 4, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  20,                                     !- Value Until Time 1
-  22:00,                                  !- Time 2 {hh:mm}
-  28,                                     !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  20;                                     !- Value Until Time 3
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 6, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  20,                                     !- Value Until Time 1
-  22:00,                                  !- Time 2 {hh:mm}
-  28,                                     !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  20;                                     !- Value Until Time 3
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 8, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  20,                                     !- Value Until Time 1
-  22:00,                                  !- Time 2 {hh:mm}
-  28,                                     !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  20;                                     !- Value Until Time 3
-
-Schedule:Day:Interval,
-  Large Office HtgSetp Default Schedule 9, !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  20,                                     !- Value Until Time 1
-  22:00,                                  !- Time 2 {hh:mm}
-  28,                                     !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  20;                                     !- Value Until Time 3
 
 Schedule:Day:Interval,
   Large Office HtgSetp Rule 1 Day Schedule, !- Name
@@ -7327,13 +6857,6 @@ Schedule:Day:Interval,
   0.25,                                   !- Value Until Time 2
   24:00,                                  !- Time 3 {hh:mm}
   1;                                      !- Value Until Time 3
-
-Schedule:Day:Interval,
-  Schedule Day 7,                         !- Name
-  Temperature 3,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  22;                                     !- Value Until Time 1
 
 Schedule:Day:Interval,
   Small Office Activity Default Schedule, !- Name

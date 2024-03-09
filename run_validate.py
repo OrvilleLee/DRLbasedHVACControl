@@ -20,7 +20,7 @@ from osm2idf import osm2idf
 from data_center import Data_Center
 from plot import Drawing
 from agent import DQN
-from tools import HVAC_setting_value, ReplayBuffer
+from tools import HVAC_setting_value, ReplayBuffer, save_to_csv
 
 # Eplus_Dir = "D:/EnergyPlusV23-1-0"
 # sys.path.insert(0, Eplus_Dir)
@@ -29,10 +29,21 @@ from pyenergyplus.api import EnergyPlusAPI
 
 
 def update_plot(draw):
+    is_x_start = False
+    is_x_end = False
     for i in DATA.x:
         if i.hour == 0 and i.minute == 0:
             draw.ax.axvline(i, linewidth=10, color='#ebfced', alpha=0.7)
             continue
+
+        # if i.hour == 8 and i.minute == 0:
+        #     x_start = i
+        #     is_x_start = True
+        # if i.hour == 21 and i.minute == 0:
+        #     x_end = i
+        #     is_x_end = True
+        # if is_x_end and is_x_start:
+        #     draw.ax.axvspan(x_start, x_end, alpha=0.7, color='#ebfced')
 
     draw.set_ax_view()
     # draw.ax.set_xlim(DATA.x[-432], DATA.x[-1])
@@ -58,12 +69,12 @@ def update_plot(draw):
                  label="Zone Mean Temperature", color='#20B2BB', linewidth=5, alpha=0.5)
 
 
-    draw.ax.plot(DATA.x, DATA.Zone_Thermostat_Heating_Setpoint_Temperature_1,
-                 label="DATA.Zone_Thermostat_Heating_Setpoint_Temperature_1", color='red', linewidth=0.5,
-                 linestyle='-.')
-    draw.ax.plot(DATA.x, DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_1,
-                 label="DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_1", color='cyan', linewidth=0.5,
-                 linestyle='-.')
+    # draw.ax.plot(DATA.x, DATA.Zone_Thermostat_Heating_Setpoint_Temperature_1,
+    #              label="DATA.Zone_Thermostat_Heating_Setpoint_Temperature_1", color='red', linewidth=0.5,
+    #              linestyle='-.')
+    # draw.ax.plot(DATA.x, DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_1,
+    #              label="DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_1", color='cyan', linewidth=0.5,
+    #              linestyle='-.')
 
     if DATA.train_switch:
         draw.ax.plot(DATA.x, DATA.reward,
@@ -77,7 +88,7 @@ def update_plot(draw):
                   label="Electricity_Zone_1", color='#FF6347', linewidth=0.5)
 
     if draw.is_ion:
-        plt.pause(0.01)
+        plt.pause(1)
     else:
         plt.show()
     # fig.canvas.draw()
@@ -165,14 +176,14 @@ def callback_function(EPstate):
             DATA.handle_Heating_Electricity  = api.exchange.get_meter_handle(EPstate, 'Heating:Electricity')
             DATA.handle_Cooling_Electricity  = api.exchange.get_meter_handle(EPstate, 'Cooling:Electricity')
 
-            DATA.handle_Electricity_Zone_1 = api.exchange.get_meter_handle(EPstate, 'Electricity:Zone:THERMAL ZONE 3')
+            DATA.handle_Electricity_Zone_1 = api.exchange.get_meter_handle(EPstate, 'Electricity:Zone:THERMAL ZONE 1')
 
 
 
 
             '''actuator'''
             # This is to get handles for actuators for each zone
-            DATA.handle_Heating_Setpoint_1 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control',  'Heating Setpoint', 'Thermal Zone 1')
+            DATA.handle_Heating_Setpoint_1 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Heating Setpoint', 'Thermal Zone 1')
             DATA.handle_Cooling_Setpoint_1 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Cooling Setpoint', 'Thermal Zone 1')
 
             DATA.handle_Heating_Setpoint_2 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Heating Setpoint', 'Thermal Zone 2')
@@ -326,13 +337,16 @@ def callback_function(EPstate):
     #
     # # if count == draw.x_view:
     # #     api.exchange.set_actuator_value(EPstate, DATA.handle_Heating_Setpoint_1, 20)
-
-
-
+    worktime_indicator = False
+    if 8 < T_hour < 21:
+        worktime_indicator = True
+    else:
+        worktime_indicator = False
 
 
     '''DQN training'''
-    if DATA.train_switch:
+    if DATA.train_switch and worktime_indicator:
+        done = False
 
         ''' current_state and also the 'next_state' for the last episode'''
         s1 = DATA.Zone_Air_Temperature_1[-1]
@@ -341,83 +355,90 @@ def callback_function(EPstate):
         s4 = DATA.Zone_Air_Temperature_2[-1]
         s5 = DATA.Zone_Air_Temperature_2[-1]
         s6 = DATA.Site_Outdoor_Air_Drybulb_Temperature[-1]
-        s7 = DATA.Electricity_HVAC[-1]
-        s8 = DATA.T_months[-1]
-        s9 = DATA.T_days[-1]
-        s10 = DATA.T_hours[-1]
-        state = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10]
-        DATA.state.append(state)
+        s7 = worktime_indicator
+        s8 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_1)
+        s9 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_2)
+        s10 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_3)
+        s11 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_4)
+        s12 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_5)
+
+        E = DATA.Electricity_HVAC[-1]
+        # s8 = DATA.T_months[-1]
+        # s9 = DATA.T_days[-1]
+        # s10 = DATA.T_hours[-1]
+        state0 = [s1 / 100, s2 / 100, s3 / 100, s4 / 100, s5 / 100,
+                  s6, s7,
+                  s8, s9, s10, s11, s12]
+        DATA.state.append(state0)
+        Temp_list = [s1, s2, s3, s4, s5]
+        Temp_mean = sum(Temp_list) / len(Temp_list)
 
         ''' reward for last episode'''
         #  Energy reward
-        factor_E = 1e-5
-        reward_E = - factor_E * s7
-        Temp_list = [s1, s2, s3, s4, s5]
-        Temp_mean = sum(Temp_list)/len(Temp_list)
-        #  Temperature reward
-        factor_T = 0.5
-        if T_hour >= 20 or T_hour <= 8:
-            positive = 0
+        if worktime_indicator:
+            factor_E = 1e-7
+            # factor_E = 0
         else:
-            positive = 1
+            # factor_E = 5e-7
+            factor_E = 0
+        reward_E = - factor_E * E
+
+        #  Temperature reward
+        if worktime_indicator:
+            positive = 0
+            factor_T = 2
+        else:
+            positive = 0
+            factor_T = 0
         reward_T_list = []
         for T in Temp_list:
-            if 22 < T < 24:
+            if 24 < T < 26:
                 reward_T_list.append(positive * T)
             else:
-                reward_T_list.append(-abs(T - 23) ** 2 * factor_T * positive)
+                reward_T_list.append(-abs(T - 25) ** 2 * factor_T)
         reward_T = np.mean(reward_T_list)
 
         #  wear-out reward
         if DATA.wear_out_flag:
-            shift_signal = (np.array(random.choice(DATA.HVAC_action_map) if len(DATA.action) < 2 else DATA.HVAC_action_map[DATA.action[-2]])
-                            ^ np.array(random.choice(DATA.HVAC_action_map) if len(DATA.action) < 1 else DATA.HVAC_action_map[DATA.action[-1]]))
+            shift_signal = (np.array(
+                random.choice(DATA.HVAC_action_map) if len(DATA.action) < 2 else DATA.HVAC_action_map[DATA.action[-2]])
+                            ^ np.array(
+                        random.choice(DATA.HVAC_action_map) if len(DATA.action) < 1 else DATA.HVAC_action_map[
+                            DATA.action[-1]]))
             n_shift_signal = np.sum(shift_signal == 1)
-            factor_S = 0.1
+            factor_S = 10
             reward_S = - factor_S * n_shift_signal
-        # if DATA.wear_out_flag:
-            reward = reward_E + reward_T + reward_S
+            # if DATA.wear_out_flag:
+            reward_ = reward_E + reward_T + reward_S
         else:
-            reward = reward_E + reward_T
-        DATA.reward.append(reward)
-        DATA.reward_random_memory.append(reward)
+            reward_S = False
+            reward_ = reward_E + reward_T
+        DATA.reward.append(reward_)
+        DATA.reward_random_memory.append(reward_)
 
-        #  Done
-        done = True
-        DATA.done.append(done)
+        '''Temperature Violation'''
+        Temp_mean_violation = 0
+        if worktime_indicator:
+            if Temp_mean > 26:
+                Temp_mean_violation = Temp_mean - 25
+            elif Temp_mean < 24:
+                Temp_mean_violation = 24 - Temp_mean
+        DATA.Temp_mean_violation.append(Temp_mean_violation)
 
-
-        if DATA.count == 0:
-            ReplayBuffer.add((DATA.state[-1],
-                              0,
-                              DATA.reward[-1],
-                              DATA.state[-1],
-                              DATA.done[-1]))
-
-        ReplayBuffer.add((DATA.state[-1] if len(DATA.state) < 2 else DATA.state[-2],
-                          0 if len(DATA.action) < 1 else DATA.action[-1],
-                          DATA.reward[-1],
-                          DATA.state[-1],
-                          DATA.done[-1]))
-        if ReplayBuffer.size() > DATA.minimal_episode:
-            batch_state, batch_action, batch_reward, batch_next_state, batch_done = ReplayBuffer.sample(32)
-            transition = {
-                'states': batch_state,
-                'actions': batch_action,
-                'rewards': batch_reward,
-                'next_states': batch_next_state,
-                'dones': batch_done
-                }
-            episode_loss = EPagent.update(transition)
-            DATA.loss.append(episode_loss)
-            DATA.loss_random_memory.append(episode_loss)
-
-
+        Temp_violation = []
+        if worktime_indicator:
+            for T in Temp_list:
+                if T > 26:
+                    Temp_violation.append(T - 26)
+                elif T < 24:
+                    Temp_violation.append(24 - T)
+        Temp_violation = np.sum(Temp_violation)
+        DATA.Temp_violation.append(Temp_violation)
 
         #  take action
-        action = EPagent.take_action(state)
-        DATA.action.append(action)
-        action_list = DATA.HVAC_action_map[action]
+        action0 = EPagent.take_action_for_validation(state0)
+        DATA.action.append(action0)
+        action_list = DATA.HVAC_action_map[action0]
         #  put action into EP for next simulation step
         api.exchange.set_actuator_value(EPstate, DATA.handle_Heating_Setpoint_1, HVAC_setting_value(action_list[0])[0])
         api.exchange.set_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_1, HVAC_setting_value(action_list[0])[1])
@@ -430,17 +451,33 @@ def callback_function(EPstate):
         api.exchange.set_actuator_value(EPstate, DATA.handle_Heating_Setpoint_5, HVAC_setting_value(action_list[4])[0])
         api.exchange.set_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_5, HVAC_setting_value(action_list[4])[1])
 
+        #  Done
+        # done = True
+        DATA.done.append(done)
 
 
+
+
+
+    else:
+        DATA.reward.append(None)
+        DATA.reward_random_memory.append(None)
+        DATA.loss.append(None)
+        DATA.loss_random_memory.append(None)
+
+        # torch.save(EPagent.target_Q_net.state_dict(), f'./weights/EPagent_{epoch}.pth')
 
     DATA.count += 1
     """Plot"""
+
     if draw.is_ion:
         if DATA.count > draw.x_view:
             update_plot(draw)
 
-    if DATA.count % 5000 == 0:
-        print(f'Time: {DATA.count} / {dt}   Temp: {Temp_mean:.3f} / 23 / {s6:.3f}   Reward(T/E/S): {reward_T:.3f} / {reward_E:.3f} / {reward_S:.3f}')
+    if DATA.train_switch and worktime_indicator:
+        if DATA.count % 5000 == 0:
+            print(
+                f'Time: {DATA.count} / {dt}   Temp: {Temp_mean:.3f} / 25 / {s6:.3f}   Reward(T/E/S): {reward_T:.3f} / {reward_E:.3f} / {reward_S:.3f}')
 
 
 class Run_EPlus():
@@ -478,19 +515,19 @@ class Run_EPlus():
             # 捕获创建目录时可能发生的任何异常
             raise OSError(f"Could not create the directory '{self.out_Dir}'. Reason: {e}")
 
-        if DATA.train_switch:
-            try:
-                if not os.path.exists(self.weights_Dir):
-                    os.makedirs(self.weights_Dir)
-                else:
-                    print(f"Directory '{self.weights_Dir}' already exists.")
-                    self.remove_folder(self.weights_Dir)
-                    os.makedirs(self.weights_Dir)
-                    print(f"A new folder '{self.weights_Dir}' has been created.")
-            except Exception as e:
-                self.isPrecondition4 = False
-                # 捕获创建目录时可能发生的任何异常
-                raise OSError(f"Could not create the directory '{self.weights_Dir}'. Reason: {e}")
+        # if DATA.train_switch:
+        #     try:
+        #         if not os.path.exists(self.weights_Dir):
+        #             os.makedirs(self.weights_Dir)
+        #         else:
+        #             print(f"Directory '{self.weights_Dir}' already exists.")
+        #             self.remove_folder(self.weights_Dir)
+        #             os.makedirs(self.weights_Dir)
+        #             print(f"A new folder '{self.weights_Dir}' has been created.")
+        #     except Exception as e:
+        #         self.isPrecondition4 = False
+        #         # 捕获创建目录时可能发生的任何异常
+        #         raise OSError(f"Could not create the directory '{self.weights_Dir}'. Reason: {e}")
 
         if self.isPrecondition1 and self.isPrecondition2 and self.isPrecondition3 and self.isPrecondition4:
             self.deploy_new_EPstate()
@@ -538,84 +575,99 @@ if __name__ == '__main__':
     weather_Dir = "./weather_data/CHN_Beijing.Beijing.545110_CSWD.epw"
     out_Dir = "./out"
     IDF_Dir = "./building_model/new_ue_room/1-18/1.18.osm"
+    # IDF_Dir = r"C:\Users\Lee\Desktop\1-18\1.18.osm"
+    # IDF_Dir = "./sp/sp.osm"
     weights_Dir = "./weights"
     # IDF_Dir = "./building_model/1.5-1-no-site.osm"
 
     DATA = Data_Center()
-    DATA.train_switch = True
+    DATA.train_switch = False
     DATA.wear_out_flag = False
-    if not DATA.train_switch:
-        draw = Drawing(DATA, is_ion=False, is_zoom=True)
-        run_instance = Run_EPlus(weather_Dir, out_Dir, IDF_Dir)
-        run_instance.start_simulation(iscallback=True, isEPtoConsole=False)
-        print(f'Total Energy consumption: {sum(DATA.Electricity_HVAC):.3f}J')
 
-    else:
-        '''DQN training'''
-        draw = Drawing(DATA, is_ion=False, is_zoom=True)
-        ReplayBuffer = ReplayBuffer(max_length=128)
-        device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        EPagent = DQN(
-            state_dim=10,
-            action_dim=32,
-            lr=0.001,
-            gamma=0.5,
-            epsilon=0.05,
-            device=device,
-            update_interval=72
-        )
-        Epoch = 10
-        run_instance = Run_EPlus(weather_Dir, out_Dir, IDF_Dir, weights_Dir)
+    draw = Drawing(DATA, is_ion=False, is_zoom=False)
+    run_instance = Run_EPlus(weather_Dir, out_Dir, IDF_Dir)
+    run_instance.start_simulation(iscallback=True, isEPtoConsole=True)
+
+    RuleBasedEnergyConsumption =sum(DATA.Electricity_HVAC)
+
+    # save_to_csv(DATA)
 
 
-        print('torch.version: ', torch.__version__)
-        print('torch.version.cuda: ', torch.version.cuda)
-        print('torch.cuda.is_available: ', torch.cuda.is_available())
-        print('torch.cuda.device_count: ', torch.cuda.device_count())
-        print('torch.cuda.current_device: ', torch.cuda.current_device())
-        device_default = torch.cuda.current_device()
-        torch.cuda.device(device_default)
-        print('torch.cuda.get_device_name: ', torch.cuda.get_device_name(device_default))
-        device = torch.device("cuda")
-        print('\n')
-        print('Training begins')
-        print('\n')
 
-        GO = time.time()
-        # for epoch in tqdm(range(1, Epoch + 1), desc='Training process: ', unit='eposide'):
-        for epoch in range(1, Epoch + 1):
-            print('==' * 50)
-            print(f'Training Processing at Epoch {epoch}/{Epoch}')
 
-            #  initialize some variables at the beginning of each epoch
-            DATA.initialize_handels()
-            DATA.initialize_valuse()
-            DATA.count = 0
+    '''DQN training'''
+    DATA = Data_Center()
+    DATA.initialize_handels()
+    DATA.initialize_valuse()
+    DATA.count = 0
+    DATA.train_switch = True
+    DATA.wear_out_flag = True
+    draw = Drawing(DATA, is_ion=False, is_zoom=False)
+    # ReplayBuffer = ReplayBuffer(max_length=128)
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    EPagent = DQN(
+        state_dim=12,
+        action_dim=32,
+        lr=0.001,
+        gamma=0.9,
+        epsilon=0,
+        device=device,
+        update_interval=72
+    )
+    # EPagent.target_Q_net.load_state_dict(torch.load('./pth_model_1-18/EPagent_1.pth'))
+    EPagent.target_Q_net.load_state_dict(torch.load('./BESTMODEL/best_3.9_EPagent_1.pth'))
+    EPagent.target_Q_net.eval()
 
-            #  Run the training
-            run_instance.start_simulation(iscallback=True, isEPtoConsole=False)
-            torch.save(EPagent.target_Q_net.state_dict(), f'./weights/EPagent_{epoch}.pth')
+    run_instance = Run_EPlus(weather_Dir, out_Dir, IDF_Dir, weights_Dir)
 
-            #  output some values to the console
-            DATA.loss_epoch.append(sum(DATA.loss_random_memory)/len(DATA.loss_random_memory))
-            DATA.reward_epoch.append(sum(DATA.reward_random_memory)/len(DATA.reward_random_memory))
-            print(f'Training loss: {DATA.loss_epoch[-1]:.2f}')
-            print(f'Reward: {DATA.reward_epoch[-1]:.2f}')
-            time_delta = time.time() - GO
-            print(f'Total Energy consumption: {sum(DATA.Electricity_HVAC):.3f}J')
-            print(f'Time use until Epoch {epoch}: {time_delta//3600:.0f}h {time_delta%3600//60:.0f}min {time_delta%60:.0f}s')
-            print('\n')
 
-        plt.figure(figsize=(12, 4))
-        plt.subplot(1, 2, 1)
-        # plt.plot(range(1, len(DATA.loss)+1), DATA.loss, 'ro-', label='train loss')
-        plt.plot(range(1, Epoch+1), DATA.loss_epoch, 'ro-', label='train loss')
-        plt.xlabel('epoch')
-        plt.ylabel('train loss')
+    print('torch.version: ', torch.__version__)
+    print('torch.version.cuda: ', torch.version.cuda)
+    print('torch.cuda.is_available: ', torch.cuda.is_available())
+    print('torch.cuda.device_count: ', torch.cuda.device_count())
+    print('torch.cuda.current_device: ', torch.cuda.current_device())
+    device_default = torch.cuda.current_device()
+    torch.cuda.device(device_default)
+    print('torch.cuda.get_device_name: ', torch.cuda.get_device_name(device_default))
+    device = torch.device("cuda")
+    print('\n')
+    print('Training begins')
+    print('\n')
 
-        plt.subplot(1, 2, 2)
-        # plt.plot(range(1, len(DATA.reward)+1), DATA.reward, 'bs-', label='reward')
-        plt.plot(range(1, Epoch+1), DATA.reward_epoch, 'bs-', label='reward')
-        plt.xlabel('epoch')
-        plt.ylabel('reward')
-        plt.show()
+    GO = time.time()
+    # for epoch in tqdm(range(1, Epoch + 1), desc='Training process: ', unit='eposide'):
+
+
+    #  initialize some variables at the beginning of each epoch
+    # DATA.initialize_handels()
+    # DATA.initialize_valuse()
+    # DATA.count = 0
+
+    #  Run the training
+    run_instance.start_simulation(iscallback=True, isEPtoConsole=False)
+
+    #  output some values to the console
+    # DATA.loss_epoch.append(sum(DATA.loss_random_memory)/len(DATA.loss_random_memory))
+    # DATA.reward_epoch.append(sum(DATA.reward_random_memory)/len(DATA.reward_random_memory))
+    # print(f'Training loss: {DATA.loss_epoch[-1]:.2f}')
+    # print(f'Reward: {DATA.reward_epoch[-1]:.2f}')
+    # time_delta = time.time() - GO
+    DQNEnergyConsumption = sum(DATA.Electricity_HVAC)
+    print(f'Rule-based Energy consumption: {RuleBasedEnergyConsumption:.3f}J')
+    print(f'DQN Energy consumption: {DQNEnergyConsumption:.3f}J')
+    print('\n')
+
+    print(f"Energy saving ratio: {(DQNEnergyConsumption/RuleBasedEnergyConsumption):.3f}")
+    # plt.figure(figsize=(12, 4))
+    # plt.subplot(1, 2, 1)
+    # # plt.plot(range(1, len(DATA.loss)+1), DATA.loss, 'ro-', label='train loss')
+    # plt.plot(range(1, Epoch+1), DATA.loss_epoch, 'ro-', label='train loss')
+    # plt.xlabel('epoch')
+    # plt.ylabel('train loss')
+    #
+    # plt.subplot(1, 2, 2)
+    # # plt.plot(range(1, len(DATA.reward)+1), DATA.reward, 'bs-', label='reward')
+    # plt.plot(range(1, Epoch+1), DATA.reward_epoch, 'bs-', label='reward')
+    # plt.xlabel('epoch')
+    # plt.ylabel('reward')
+    # plt.show()

@@ -208,6 +208,9 @@ class Data_Center():
         self.done = []
         self.loss = []
         self.loss_random_memory = []
+        self.Temp_mean_violation = []
+        self.Temp_violation = []
+
 
         self.loss_epoch = []
         self.reward_epoch = []
@@ -400,6 +403,8 @@ class Data_Center():
         self.done = []
         self.loss = []
         self.loss_random_memory = []
+        self.Temp_mean_violation = []
+        self.Temp_violation = []
 
     def initialize_handels(self):
         """

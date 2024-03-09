@@ -27,14 +27,22 @@ class DQN:
             action_index = self.Q_net(state).argmax().item()  # TODO
         return action_index
 
+    def take_action_for_validation(self, state):
+        with torch.no_grad():
+            state = torch.tensor([state], dtype=torch.float).to(self.device)
+            action_index = self.target_Q_net(state).argmax().item()  # TODO
+        return action_index
+
     def update(self, transition):
+        # current_state = torch.tensor(current_state, dtype=torch.float).to(self.device)
+
         state = torch.tensor(transition['states'], dtype=torch.float).to(self.device)
         action = torch.tensor(transition['actions']).view(-1, 1).to(self.device)
         reward = torch.tensor(transition['rewards'], dtype=torch.float).view(-1, 1).to(self.device)
         next_state = torch.tensor(transition['next_states'], dtype=torch.float).to(self.device)
         done = torch.tensor(transition['dones'], dtype=torch.float).view(-1, 1).to(self.device)
 
-        Q_value = self.Q_net(state).gather(1, action.to(torch.int64))
+        Q_value = self.Q_net(state).gather(1, action)
 
         next_Q_value_max = self.target_Q_net(next_state).max(1)[0].view(-1, 1)
         Q_target = reward + self.gamma * next_Q_value_max * (1 - done).view(-1, 1)
@@ -45,6 +53,7 @@ class DQN:
         self.optimizer.step()
 
         if self.count % self.update_interval == 0:
+            # print(f'Q网络已更新，count={self.count}')
             self.target_Q_net.load_state_dict(
                 self.target_Q_net.state_dict()
             )

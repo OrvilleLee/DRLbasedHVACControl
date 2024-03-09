@@ -27,7 +27,15 @@ class Drawing():
         self.ax.legend(loc=2, bbox_to_anchor=(-0.17, 1))
         self.ax2.legend(loc=2, bbox_to_anchor=(-0.17, 0.75))
 
+        self.ax.axhline(y=22, color='green', linestyle='-')
+        self.ax.axhline(y=28, color='green', linestyle='-')
+        self.ax.axhline(y=16, color='r', linestyle='-')
+        self.ax.axhline(y=32, color='r', linestyle='-')
+        self.ax.axhline(y=0, color='b', linestyle='-', linewidth=5, alpha=0.5)
+
     def plot_line(self):
+
+
         # self.ax.plot(self.DATA.x, self.DATA.Environmental_Impact_Total_CO2_Emissions_Carbon_Equivalent_Mass,
         #              label="CO2 mass", color='black',linewidth=1)
         self.ax.plot(self.DATA.x, self.DATA.Site_Outdoor_Air_Drybulb_Temperature,
@@ -47,10 +55,10 @@ class Drawing():
                      label="Zone Mean Temperature", color='#20B2BB', linewidth=5, alpha=0.5)
 
 
-        self.ax.plot(self.DATA.x, self.DATA.Zone_Thermostat_Heating_Setpoint_Temperature_1,
-                     label="Zone_Heating_Setpoint_1", color='red', linewidth=0.5)
-        self.ax.plot(self.DATA.x, self.DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_1,
-                     label="Zone_Cooling_Setpoint_1", color='cyan', linewidth=0.5)
+        # self.ax.plot(self.DATA.x, self.DATA.Zone_Thermostat_Heating_Setpoint_Temperature_1,
+        #              label="Zone_Heating_Setpoint_1", color='red', linewidth=0.5)
+        # self.ax.plot(self.DATA.x, self.DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_1,
+        #              label="Zone_Cooling_Setpoint_1", color='cyan', linewidth=0.5)
 
         self.ax.plot(self.DATA.x, self.DATA.reward,
                      label="Reward", color='grey', linewidth=1)

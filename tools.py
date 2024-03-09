@@ -22,8 +22,8 @@ class ReplayBuffer():
 
 def HVAC_action_map():
     HVAC_action_map = []
-    for TZ1 in [0,1]:
-        for TZ2 in [0,1]:
+    for TZ1 in [0, 1]:
+        for TZ2 in [0, 1]:
             for TZ3 in [0, 1]:
                 for TZ4 in [0, 1]:
                     for TZ5 in [0, 1]:
@@ -32,11 +32,11 @@ def HVAC_action_map():
 
 def HVAC_setting_value(on_of):
     if on_of:
-        temp_setting = [16, 32]
-        # temp_setting = [22, 24]
+        # temp_setting = [22, 28]
+        temp_setting = [24, 26]
     else:
-        temp_setting = [22, 24]
-        # temp_setting = [16, 32]
+        # temp_setting = [24, 26]
+        temp_setting = [22, 28]
     return temp_setting
 
 def save_to_csv(DATA):
@@ -66,4 +66,4 @@ if __name__ == '__main__':
     map = HVAC_action_map()
     pprint(map)
     print(len(map))
-    save_to_csv()
+    # save_to_csv()

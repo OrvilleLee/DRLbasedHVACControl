@@ -13019,15 +13019,9 @@ OS:Schedule:Day,
   Large Office ClgSetp Default Schedule 1, ! Name
   {41c7ee57-bfc4-48e2-9eb9-df0001ab88f0}, ! Schedule Type Limits Name
   ,                                       ! Interpolate to Timestep
-  6,                                      !- Hour 1
+  24,                                     !- Hour 1
   0,                                      !- Minute 1
-  30,                                     !- Value Until Time 1
-  22,                                     !- Hour 2
-  0,                                      !- Minute 2
-  26,                                     !- Value Until Time 2
-  24,                                     !- Hour 3
-  0,                                      !- Minute 3
-  30;                                     !- Value Until Time 3
+  26;                                     !- Value Until Time 1
 
 OS:Schedule:Day,
   {dacd55f9-5dcb-43c2-8760-798e191bda46}, ! Handle
@@ -13108,15 +13102,9 @@ OS:Schedule:Day,
   Large Office HtgSetp Default Schedule 1, ! Name
   {a9dadb87-2284-4037-ada9-d8ba03d45fc3}, ! Schedule Type Limits Name
   ,                                       ! Interpolate to Timestep
-  6,                                      !- Hour 1
+  24,                                     !- Hour 1
   0,                                      !- Minute 1
-  20,                                     !- Value Until Time 1
-  22,                                     !- Hour 2
-  0,                                      !- Minute 2
-  28,                                     !- Value Until Time 2
-  24,                                     !- Hour 3
-  0,                                      !- Minute 3
-  20;                                     !- Value Until Time 3
+  24;                                     !- Value Until Time 1
 
 OS:Schedule:Day,
   {ac1833fd-ae06-427f-8f1a-a51946a350d8}, ! Handle
@@ -13148,13 +13136,13 @@ OS:Schedule:Rule,
   {765b0d84-a966-4ae1-9abd-fab4d55e89df}, !- Schedule Ruleset Name
   1,                                      !- Rule Order
   {103ee750-b78a-4aa3-a233-e3f6c6648687}, !- Day Schedule Name
-  Yes,                                    !- Apply Sunday
-  Yes,                                    !- Apply Monday
-  Yes,                                    !- Apply Tuesday
-  Yes,                                    !- Apply Wednesday
-  Yes,                                    !- Apply Thursday
-  Yes,                                    !- Apply Friday
-  Yes,                                    !- Apply Saturday
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
   DateRange,                              !- Date Specification Type
   1,                                      !- Start Month
   1,                                      !- Start Day
@@ -13176,13 +13164,13 @@ OS:Schedule:Rule,
   {765b0d84-a966-4ae1-9abd-fab4d55e89df}, !- Schedule Ruleset Name
   2,                                      !- Rule Order
   {101b0d57-6feb-4cfc-8bc8-c41cc0465679}, !- Day Schedule Name
-  Yes,                                    !- Apply Sunday
-  Yes,                                    !- Apply Monday
-  Yes,                                    !- Apply Tuesday
-  Yes,                                    !- Apply Wednesday
-  Yes,                                    !- Apply Thursday
-  Yes,                                    !- Apply Friday
-  Yes,                                    !- Apply Saturday
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
   DateRange,                              !- Date Specification Type
   1,                                      !- Start Month
   1,                                      !- Start Day
@@ -16045,7 +16033,7 @@ OS:Schedule:Day,
   0,                                      !- Value Until Time 1
   21,                                     !- Hour 2
   0,                                      !- Minute 2
-  0.85,                                   !- Value Until Time 2
+  1,                                      !- Value Until Time 2
   24,                                     !- Hour 3
   0,                                      !- Minute 3
   0;                                      !- Value Until Time 3
@@ -16612,13 +16600,13 @@ OS:Schedule:Rule,
   {e1a46573-1579-432d-91e8-949e0fd25ad9}, !- Schedule Ruleset Name
   2,                                      !- Rule Order
   {c810ef0e-573c-4fac-a553-e51a68bc4258}, !- Day Schedule Name
-  Yes,                                    !- Apply Sunday
-  Yes,                                    !- Apply Monday
-  Yes,                                    !- Apply Tuesday
-  Yes,                                    !- Apply Wednesday
-  Yes,                                    !- Apply Thursday
-  Yes,                                    !- Apply Friday
-  Yes,                                    !- Apply Saturday
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
   DateRange,                              !- Date Specification Type
   10,                                     !- Start Month
   1,                                      !- Start Day
@@ -16640,13 +16628,13 @@ OS:Schedule:Rule,
   {e1a46573-1579-432d-91e8-949e0fd25ad9}, !- Schedule Ruleset Name
   1,                                      !- Rule Order
   {3b66eeb6-1dfd-467d-83ad-7b6da4c43859}, !- Day Schedule Name
-  Yes,                                    !- Apply Sunday
-  Yes,                                    !- Apply Monday
-  Yes,                                    !- Apply Tuesday
-  Yes,                                    !- Apply Wednesday
-  Yes,                                    !- Apply Thursday
-  Yes,                                    !- Apply Friday
-  Yes,                                    !- Apply Saturday
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
   DateRange,                              !- Date Specification Type
   5,                                      !- Start Month
   1,                                      !- Start Day
@@ -16668,13 +16656,13 @@ OS:Schedule:Rule,
   {e1a46573-1579-432d-91e8-949e0fd25ad9}, !- Schedule Ruleset Name
   0,                                      !- Rule Order
   {abeef1a2-d6f4-423b-ac85-11351be78ad3}, !- Day Schedule Name
-  Yes,                                    !- Apply Sunday
-  Yes,                                    !- Apply Monday
-  Yes,                                    !- Apply Tuesday
-  Yes,                                    !- Apply Wednesday
-  Yes,                                    !- Apply Thursday
-  Yes,                                    !- Apply Friday
-  Yes,                                    !- Apply Saturday
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
   DateRange,                              !- Date Specification Type
   1,                                      !- Start Month
   1,                                      !- Start Day
@@ -16696,13 +16684,13 @@ OS:Schedule:Rule,
   {765b0d84-a966-4ae1-9abd-fab4d55e89df}, !- Schedule Ruleset Name
   0,                                      !- Rule Order
   {f5aab866-08e7-41d6-8065-33753a1b7286}, !- Day Schedule Name
-  Yes,                                    !- Apply Sunday
-  Yes,                                    !- Apply Monday
-  Yes,                                    !- Apply Tuesday
-  Yes,                                    !- Apply Wednesday
-  Yes,                                    !- Apply Thursday
-  Yes,                                    !- Apply Friday
-  Yes,                                    !- Apply Saturday
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
   DateRange,                              !- Date Specification Type
   5,                                      !- Start Month
   1,                                      !- Start Day
@@ -16716,7 +16704,7 @@ OS:Schedule:Day,
   ,                                       !- Interpolate to Timestep
   24,                                     !- Hour 1
   0,                                      !- Minute 1
-  18;                                     !- Value Until Time 1
+  22;                                     !- Value Until Time 1
 
 OS:Rendering:Color,
   {cc652e05-6ed1-4f90-b9f4-f16e34d3572d}, !- Handle
