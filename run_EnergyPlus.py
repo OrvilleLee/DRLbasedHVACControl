@@ -624,7 +624,8 @@ class Run_EPlus():
 if __name__ == '__main__':
     weather_Dir = "./weather_data/CHN_Beijing.Beijing.545110_CSWD.epw"
     out_Dir = "./out"
-    IDF_Dir = "./building_model/new_ue_room/1-18/1.18.osm"
+    # IDF_Dir = "./building_model/new_ue_room/1-18/1.18.osm"
+    IDF_Dir = "./EPmodel/1.18.osm"
     # IDF_Dir = r"C:\Users\Lee\Desktop\1-18\1.18.osm"
     # IDF_Dir = "./sp/sp.osm"
     weights_Dir = "./weights"

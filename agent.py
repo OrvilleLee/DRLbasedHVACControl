@@ -24,13 +24,13 @@ class DQN:
             action_index = np.random.randint(self.action_dim)
         else:
             state = torch.tensor([state], dtype=torch.float).to(self.device)
-            action_index = self.Q_net(state).argmax().item()  # TODO
+            action_index = self.Q_net(state).argmax().item()
         return action_index
 
     def take_action_for_validation(self, state):
         with torch.no_grad():
             state = torch.tensor([state], dtype=torch.float).to(self.device)
-            action_index = self.target_Q_net(state).argmax().item()  # TODO
+            action_index = self.target_Q_net(state).argmax().item()
         return action_index
 
     def update(self, transition):

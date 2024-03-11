@@ -97,7 +97,7 @@ class osm2idf():
         timestep.setNumberOfTimestepsPerHour(step)
         print(timestep)
 
-    def sava2idf(self, save_path = './building_model/'):
+    def sava2idf(self, save_path = './EPmodel/'):
         ft = openstudio.energyplus.ForwardTranslator()
         w = ft.translateModel(self.m)
         self.save_path = save_path + 'OSM_Translated_IDF'
