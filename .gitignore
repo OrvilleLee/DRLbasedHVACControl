@@ -3,3 +3,5 @@ out/
 *.csv
 sp/
 building_model/
+EPmodel/
+BESTMODEL/

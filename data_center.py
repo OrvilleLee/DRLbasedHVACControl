@@ -7,8 +7,8 @@ class Data_Center():
         self.train_switch = train_switch
         self.is_handle = False
         self.count = 0
-        self.minimal_episode = 72
-        self.wear_out_flag = True
+        self.minimal_episode = 400
+        self.wear_out_flag = False
         """
         This part is for ENVIRONMENT actuator handles
         """
@@ -80,6 +80,17 @@ class Data_Center():
         self.handle_Zone_Thermostat_Heating_Setpoint_Temperature_5 = -1
         self.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_5 = -1
 
+        # thermal zone 6
+        self.handle_Zone_Air_Relative_Humidity_6 = -1
+        self.handle_Zone_Windows_Total_Heat_Gain_Energy_6 = -1
+        self.handle_Zone_Infiltration_Mass_6 = -1
+        self.handle_Zone_Mechanical_Ventilation_Mass_6 = -1
+        self.handle_Zone_Mechanical_Ventilation_Mass_Flow_Rate_6 = -1
+        self.handle_Zone_Air_Temperature_6 = -1
+        self.handle_Zone_Mean_Radiant_Temperature_6 = -1
+        self.handle_Zone_Thermostat_Heating_Setpoint_Temperature_6 = -1
+        self.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_6 = -1
+
         # Energy handles --- meters
         self.handle_Electricity_Facility = -1
         self.handle_Electricity_HVAC = -1
@@ -99,6 +110,8 @@ class Data_Center():
         self.handle_Cooling_Setpoint_4 = -1
         self.handle_Heating_Setpoint_5 = -1
         self.handle_Cooling_Setpoint_5 = -1
+        self.handle_Heating_Setpoint_6 = -1
+        self.handle_Cooling_Setpoint_6 = -1
 
         self.handles = []
 
@@ -170,6 +183,17 @@ class Data_Center():
         self.Zone_Mean_Radiant_Temperature_5 = []
         self.Zone_Thermostat_Heating_Setpoint_Temperature_5 = []
         self.Zone_Thermostat_Cooling_Setpoint_Temperature_5 = []
+
+        # thermal zone 6
+        self.Zone_Air_Relative_Humidity_6 = []
+        self.Zone_Windows_Total_Heat_Gain_Energy_6 = []
+        self.Zone_Infiltration_Mass_6 = []
+        self.Zone_Mechanical_Ventilation_Mass_6 = []
+        self.Zone_Mechanical_Ventilation_Mass_Flow_Rate_6 = []
+        self.Zone_Air_Temperature_6 = []
+        self.Zone_Mean_Radiant_Temperature_6 = []
+        self.Zone_Thermostat_Heating_Setpoint_Temperature_6 = []
+        self.Zone_Thermostat_Cooling_Setpoint_Temperature_6 = []
 
         self.Zone_Mean_Temperature = []
 
@@ -276,6 +300,16 @@ class Data_Center():
             self.handle_Zone_Thermostat_Heating_Setpoint_Temperature_5,
             self.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_5,
 
+            self.handle_Zone_Air_Relative_Humidity_6,
+            self.handle_Zone_Windows_Total_Heat_Gain_Energy_6,
+            self.handle_Zone_Infiltration_Mass_6,
+            self.handle_Zone_Mechanical_Ventilation_Mass_6,
+            self.handle_Zone_Mechanical_Ventilation_Mass_Flow_Rate_6,
+            self.handle_Zone_Air_Temperature_6,
+            self.handle_Zone_Mean_Radiant_Temperature_6,
+            self.handle_Zone_Thermostat_Heating_Setpoint_Temperature_6,
+            self.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_6,
+
             self.handle_Electricity_Facility,
             self.handle_Electricity_HVAC,
             self.handle_Heating_Electricity,
@@ -291,6 +325,8 @@ class Data_Center():
             self.handle_Cooling_Setpoint_4,
             self.handle_Heating_Setpoint_5,
             self.handle_Cooling_Setpoint_5,
+            self.handle_Heating_Setpoint_6,
+            self.handle_Cooling_Setpoint_6,
         ]
         if -1 in self.handles:
             return False
@@ -365,6 +401,17 @@ class Data_Center():
         self.Zone_Mean_Radiant_Temperature_5 = []
         self.Zone_Thermostat_Heating_Setpoint_Temperature_5 = []
         self.Zone_Thermostat_Cooling_Setpoint_Temperature_5 = []
+
+        # thermal zone 6
+        self.Zone_Air_Relative_Humidity_6 = []
+        self.Zone_Windows_Total_Heat_Gain_Energy_6 = []
+        self.Zone_Infiltration_Mass_6 = []
+        self.Zone_Mechanical_Ventilation_Mass_6 = []
+        self.Zone_Mechanical_Ventilation_Mass_Flow_Rate_6 = []
+        self.Zone_Air_Temperature_6 = []
+        self.Zone_Mean_Radiant_Temperature_6 = []
+        self.Zone_Thermostat_Heating_Setpoint_Temperature_6 = []
+        self.Zone_Thermostat_Cooling_Setpoint_Temperature_6 = []
 
         self.Zone_Mean_Temperature = []
 
@@ -478,6 +525,17 @@ class Data_Center():
         self.handle_Zone_Thermostat_Heating_Setpoint_Temperature_5 = -1
         self.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_5 = -1
 
+        # thermal zone 6
+        self.handle_Zone_Air_Relative_Humidity_6 = -1
+        self.handle_Zone_Windows_Total_Heat_Gain_Energy_6 = -1
+        self.handle_Zone_Infiltration_Mass_6 = -1
+        self.handle_Zone_Mechanical_Ventilation_Mass_6 = -1
+        self.handle_Zone_Mechanical_Ventilation_Mass_Flow_Rate_6 = -1
+        self.handle_Zone_Air_Temperature_6 = -1
+        self.handle_Zone_Mean_Radiant_Temperature_6 = -1
+        self.handle_Zone_Thermostat_Heating_Setpoint_Temperature_6 = -1
+        self.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_6 = -1
+
         # Energy handles --- meters
         self.handle_Electricity_Facility = -1
         self.handle_Electricity_HVAC = -1
@@ -497,6 +555,8 @@ class Data_Center():
         self.handle_Cooling_Setpoint_4 = -1
         self.handle_Heating_Setpoint_5 = -1
         self.handle_Cooling_Setpoint_5 = -1
+        self.handle_Heating_Setpoint_6 = -1
+        self.handle_Cooling_Setpoint_6 = -1
 
         self.handles = []
         self.is_handle = False

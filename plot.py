@@ -14,18 +14,28 @@ class Drawing():
 
         self.fig, self.ax = plt.subplots(figsize=(20, 10))
 
-        self.ax.set_title("Zone Temperature and Zone Energy Consumption")
-        self.ax.set_xlabel("Date")
-        self.ax.set_ylabel("Zone Temperature(℃)")
-
+        self.ax.set_title("Zone Temperature and Zone Energy Consumption",fontsize=16)
+        self.ax.set_xlabel("Date",fontsize=16)
+        self.ax.set_ylabel("Zone Temperature(℃)",fontsize=16)
+        self.ax.tick_params(axis='x', labelsize=14)
+        self.ax.tick_params(axis='y', labelsize=14)
 
         self.ax2 = self.ax.twinx()
-        self.ax2.set_ylabel("HAVC energy consumption(J)")
+        self.ax2.set_ylabel("HAVC energy consumption(J)",fontsize=16)
+        self.ax2.tick_params(axis='y', labelsize=14)
 
         self.plot_line()
 
-        self.ax.legend(loc=2, bbox_to_anchor=(-0.17, 1))
-        self.ax2.legend(loc=2, bbox_to_anchor=(-0.17, 0.75))
+        handles, labels = [], []
+        for ax in [self.ax, self.ax2]:
+            for handle, label in zip(*ax.get_legend_handles_labels()):
+                handles.append(handle)
+                labels.append(label)
+
+        self.ax.legend(handles, labels, loc='upper left', bbox_to_anchor=(1, 1))
+
+        # self.ax.legend(loc=2, bbox_to_anchor=(-0.17, 1))
+        # self.ax2.legend(loc=2, bbox_to_anchor=(-0.17, 0.75))
 
         self.ax.axhline(y=22, color='green', linestyle='-')
         self.ax.axhline(y=28, color='green', linestyle='-')
@@ -51,13 +61,15 @@ class Drawing():
                      label="Zone 4 Temperature", color='#FFD700', linewidth=2)
         self.ax.plot(self.DATA.x, self.DATA.Zone_Air_Temperature_5,
                      label="Zone 5 Temperature", color='#20B2AA', linewidth=2)
+        self.ax.plot(self.DATA.x, self.DATA.Zone_Air_Temperature_6,
+                     label="Zone 6 Temperature", color='#FF4500', linewidth=2)
         self.ax.plot(self.DATA.x, self.DATA.Zone_Mean_Temperature,
                      label="Zone Mean Temperature", color='#20B2BB', linewidth=5, alpha=0.5)
 
 
-        # self.ax.plot(self.DATA.x, self.DATA.Zone_Thermostat_Heating_Setpoint_Temperature_1,
+        # self.ax.plot(self.DATA.x, self.DATA.Zone_Thermostat_Heating_Setpoint_Temperature_6,
         #              label="Zone_Heating_Setpoint_1", color='red', linewidth=0.5)
-        # self.ax.plot(self.DATA.x, self.DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_1,
+        # self.ax.plot(self.DATA.x, self.DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_6,
         #              label="Zone_Cooling_Setpoint_1", color='cyan', linewidth=0.5)
 
         self.ax.plot(self.DATA.x, self.DATA.reward,
@@ -67,8 +79,6 @@ class Drawing():
 
         self.ax2.plot(self.DATA.x, self.DATA.Electricity_HVAC,
                      label="Electricity_HVAC", color='red', linewidth=1)
-        self.ax2.plot(self.DATA.x, self.DATA.Electricity_Zone_1,
-                      label="Electricity_Zone_1", color='#FF6347', linewidth=0.5)
 
     def set_ax_view(self):
         self.ax.set_ylim(-25, 40)

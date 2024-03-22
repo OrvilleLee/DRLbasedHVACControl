@@ -20,23 +20,48 @@ class ReplayBuffer():
         return len(self.deque)
 
 
+# def HVAC_action_map():
+#     HVAC_action_map = []
+#     for TZ1 in [0, 1]:
+#         for TZ2 in [0, 1]:
+#             for TZ3 in [0, 1]:
+#                 for TZ4 in [0, 1]:
+#                     for TZ5 in [0, 1]:
+#                         for TZ6 in [0, 1]:
+#                             HVAC_action_map.append([TZ1, TZ2, TZ3, TZ4, TZ5, TZ6])
+#     # for TZ1 in [2, 3]:
+#     #     for TZ2 in [2, 3]:
+#     #         for TZ3 in [2, 3]:
+#     #             for TZ4 in [2, 3]:
+#     #                 for TZ5 in [2, 3]:
+#     #                     for TZ6 in [2, 3]:
+#     #                         HVAC_action_map.append([TZ1, TZ2, TZ3, TZ4, TZ5, TZ6])
+#
+#     return HVAC_action_map
+
 def HVAC_action_map():
     HVAC_action_map = []
-    for TZ1 in [0, 1]:
-        for TZ2 in [0, 1]:
-            for TZ3 in [0, 1]:
-                for TZ4 in [0, 1]:
-                    for TZ5 in [0, 1]:
-                        HVAC_action_map.append([TZ1, TZ2, TZ3, TZ4, TZ5])
+    for clg_standard in range(23, 26):
+        clg1 = clg_standard
+        for clg2 in range(23, 26):
+            for clg3 in range(23, 26):
+                for clg4 in range(23, 26):
+                    for clg5 in range(23, 26):
+                        for clg6 in range(23, 26):
+                            HVAC_action_map.append([clg1, clg2, clg3, clg4, clg5, clg6])
     return HVAC_action_map
 
 def HVAC_setting_value(on_of):
-    if on_of:
+    if on_of == 0:
         # temp_setting = [22, 28]
-        temp_setting = [24, 26]
-    else:
-        # temp_setting = [24, 26]
         temp_setting = [22, 28]
+    elif on_of == 1:
+        # temp_setting = [24, 26]
+        temp_setting = [24, 26]
+    # elif on_of == 2:
+    #     temp_setting = [22, 24]
+    # else:
+    #     temp_setting = [22, 26]
     return temp_setting
 
 def save_to_csv(DATA):

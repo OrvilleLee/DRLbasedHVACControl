@@ -65,27 +65,28 @@ def update_plot(draw):
                  label="Zone 4 Temperature", color='#FFD700', linewidth=1)
     draw.ax.plot(DATA.x, DATA.Zone_Air_Temperature_5,
                  label="Zone 5 Temperature", color='#20B2AA', linewidth=1)
+    draw.ax.plot(DATA.x, DATA.Zone_Air_Temperature_6,
+                 label="Zone 6 Temperature", color='#FF4500', linewidth=1)
     draw.ax.plot(DATA.x, DATA.Zone_Mean_Temperature,
                  label="Zone Mean Temperature", color='#20B2BB', linewidth=5, alpha=0.5)
 
 
-    # draw.ax.plot(DATA.x, DATA.Zone_Thermostat_Heating_Setpoint_Temperature_1,
+    # draw.ax.plot(DATA.x, DATA.Zone_Thermostat_Heating_Setpoint_Temperature_6,
     #              label="DATA.Zone_Thermostat_Heating_Setpoint_Temperature_1", color='red', linewidth=0.5,
     #              linestyle='-.')
-    # draw.ax.plot(DATA.x, DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_1,
+    # draw.ax.plot(DATA.x, DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_6,
     #              label="DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_1", color='cyan', linewidth=0.5,
     #              linestyle='-.')
 
     if DATA.train_switch:
-        draw.ax.plot(DATA.x, DATA.reward,
+        scaled_reward = [x * 0.05 if x is not None else None for x in DATA.reward]
+        draw.ax.plot(DATA.x, scaled_reward,
                      label="Reward", color='grey', linewidth=1)
 
 
 
     draw.ax2.plot(DATA.x, DATA.Electricity_HVAC,
                   label="Electricity_HVAC", color='red', linewidth=0.5)
-    draw.ax2.plot(DATA.x, DATA.Electricity_Zone_1,
-                  label="Electricity_Zone_1", color='#FF6347', linewidth=0.5)
 
     if draw.is_ion:
         plt.pause(1)
@@ -103,7 +104,7 @@ def callback_function(EPstate):
             return
         else:
             DATA.is_handle = True
-            print('\033[32mApi for data exchange is fully ready\033[0m')
+            # print('\033[32mApi for data exchange is fully ready\033[0m')
 
             '''Define variable handles'''
             DATA.handle_Environmental_Impact_Total_CO2_Emissions_Carbon_Equivalent_Mass = api.exchange.get_variable_handle(EPstate, 'Environmental Impact Total CO2 Emissions Carbon Equivalent Mass', 'Thermal Zone 1')
@@ -170,20 +171,29 @@ def callback_function(EPstate):
             DATA.handle_Zone_Thermostat_Heating_Setpoint_Temperature_5 = api.exchange.get_variable_handle(EPstate, 'Zone Thermostat Heating Setpoint Temperature', 'Thermal Zone 5')
             DATA.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_5 = api.exchange.get_variable_handle(EPstate, 'Zone Thermostat Cooling Setpoint Temperature', 'Thermal Zone 5')
 
+            # This is to get handles for Thermal Zone 6
+            DATA.handle_Zone_Air_Relative_Humidity_6                   = api.exchange.get_variable_handle(EPstate, 'Zone Air Relative Humidity', 'Thermal Zone 6')
+            DATA.handle_Zone_Windows_Total_Heat_Gain_Energy_6          = api.exchange.get_variable_handle(EPstate, 'Zone Windows Total Heat Gain Energy', 'Thermal Zone 6')
+            DATA.handle_Zone_Infiltration_Mass_6                       = api.exchange.get_variable_handle(EPstate, 'Zone Infiltration Mass', 'Thermal Zone 6')
+            DATA.handle_Zone_Mechanical_Ventilation_Mass_6             = api.exchange.get_variable_handle(EPstate, 'Zone Mechanical Ventilation Mass', 'Thermal Zone 6')
+            DATA.handle_Zone_Mechanical_Ventilation_Mass_Flow_Rate_6   = api.exchange.get_variable_handle(EPstate, 'Zone Mechanical Ventilation Mass Flow Rate', 'Thermal Zone 6')
+            DATA.handle_Zone_Air_Temperature_6                         = api.exchange.get_variable_handle(EPstate, 'Zone Air Temperature', 'Thermal Zone 6')
+            DATA.handle_Zone_Mean_Radiant_Temperature_6                = api.exchange.get_variable_handle(EPstate, 'Zone Mean Radiant Temperature', 'Thermal Zone 6')
+            DATA.handle_Zone_Thermostat_Heating_Setpoint_Temperature_6 = api.exchange.get_variable_handle(EPstate, 'Zone Thermostat Heating Setpoint Temperature', 'Thermal Zone 6')
+            DATA.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_6 = api.exchange.get_variable_handle(EPstate, 'Zone Thermostat Cooling Setpoint Temperature', 'Thermal Zone 6')
+
             # This is to get METER handles for energy consumption
             DATA.handle_Electricity_Facility = api.exchange.get_meter_handle(EPstate, 'Electricity:Facility')
             DATA.handle_Electricity_HVAC     = api.exchange.get_meter_handle(EPstate, 'Electricity:HVAC')
             DATA.handle_Heating_Electricity  = api.exchange.get_meter_handle(EPstate, 'Heating:Electricity')
             DATA.handle_Cooling_Electricity  = api.exchange.get_meter_handle(EPstate, 'Cooling:Electricity')
 
-            DATA.handle_Electricity_Zone_1 = api.exchange.get_meter_handle(EPstate, 'Electricity:Zone:THERMAL ZONE 1')
-
 
 
 
             '''actuator'''
             # This is to get handles for actuators for each zone
-            DATA.handle_Heating_Setpoint_1 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Heating Setpoint', 'Thermal Zone 1')
+            DATA.handle_Heating_Setpoint_1 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control',  'Heating Setpoint', 'Thermal Zone 1')
             DATA.handle_Cooling_Setpoint_1 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Cooling Setpoint', 'Thermal Zone 1')
 
             DATA.handle_Heating_Setpoint_2 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Heating Setpoint', 'Thermal Zone 2')
@@ -197,6 +207,9 @@ def callback_function(EPstate):
 
             DATA.handle_Heating_Setpoint_5 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Heating Setpoint', 'Thermal Zone 5')
             DATA.handle_Cooling_Setpoint_5 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Cooling Setpoint', 'Thermal Zone 5')
+
+            DATA.handle_Heating_Setpoint_6 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Heating Setpoint', 'Thermal Zone 6')
+            DATA.handle_Cooling_Setpoint_6 = api.exchange.get_actuator_handle(EPstate, 'Zone Temperature Control', 'Cooling Setpoint', 'Thermal Zone 6')
 
             # print(DATA.get_handles_state())
             if not DATA.get_handles_state():
@@ -274,11 +287,23 @@ def callback_function(EPstate):
     DATA.Zone_Thermostat_Heating_Setpoint_Temperature_5.append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Thermostat_Heating_Setpoint_Temperature_5))
     DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_5.append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_5))
 
+    # Thermal Zone 6
+    DATA.Zone_Air_Relative_Humidity_6                  .append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Air_Relative_Humidity_6))
+    DATA.Zone_Windows_Total_Heat_Gain_Energy_6         .append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Windows_Total_Heat_Gain_Energy_6))
+    DATA.Zone_Infiltration_Mass_6                      .append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Infiltration_Mass_6))
+    DATA.Zone_Mechanical_Ventilation_Mass_6            .append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Mechanical_Ventilation_Mass_6))
+    DATA.Zone_Mechanical_Ventilation_Mass_Flow_Rate_6  .append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Mechanical_Ventilation_Mass_Flow_Rate_6))
+    DATA.Zone_Air_Temperature_6                        .append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Air_Temperature_6))
+    DATA.Zone_Mean_Radiant_Temperature_6               .append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Mean_Radiant_Temperature_6))
+    DATA.Zone_Thermostat_Heating_Setpoint_Temperature_6.append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Thermostat_Heating_Setpoint_Temperature_6))
+    DATA.Zone_Thermostat_Cooling_Setpoint_Temperature_6.append(api.exchange.get_variable_value(EPstate, DATA.handle_Zone_Thermostat_Cooling_Setpoint_Temperature_6))
+
     DATA.Zone_Mean_Temperature.append((DATA.Zone_Air_Temperature_1[-1] +
                                       DATA.Zone_Air_Temperature_2[-1] +
                                       DATA.Zone_Air_Temperature_3[-1] +
                                       DATA.Zone_Air_Temperature_4[-1] +
-                                      DATA.Zone_Air_Temperature_5[-1])/5)
+                                      DATA.Zone_Air_Temperature_5[-1] +
+                                      DATA.Zone_Air_Temperature_6[-1])/6)
 
     # Energy
     DATA.Electricity_Facility.append(api.exchange.get_meter_value(EPstate, DATA.handle_Electricity_Facility))
@@ -286,7 +311,6 @@ def callback_function(EPstate):
     DATA.Heating_Electricity .append(api.exchange.get_meter_value(EPstate, DATA.handle_Heating_Electricity))
     DATA.Cooling_Electricity .append(api.exchange.get_meter_value(EPstate, DATA.handle_Cooling_Electricity))
 
-    DATA.Electricity_Zone_1  .append(api.exchange.get_meter_value(EPstate, DATA.handle_Electricity_Zone_1))
 
     # Time
     # T_year = api.exchange.year(EPstate)
@@ -343,6 +367,11 @@ def callback_function(EPstate):
     else:
         worktime_indicator = False
 
+    if 5 <= T_month <= 10:
+        is_summer = 10
+    else:
+        is_summer = 1
+
 
     '''DQN training'''
     if DATA.train_switch and worktime_indicator:
@@ -351,62 +380,86 @@ def callback_function(EPstate):
         ''' current_state and also the 'next_state' for the last episode'''
         s1 = DATA.Zone_Air_Temperature_1[-1]
         s2 = DATA.Zone_Air_Temperature_2[-1]
-        s3 = DATA.Zone_Air_Temperature_2[-1]
-        s4 = DATA.Zone_Air_Temperature_2[-1]
-        s5 = DATA.Zone_Air_Temperature_2[-1]
-        s6 = DATA.Site_Outdoor_Air_Drybulb_Temperature[-1]
-        s7 = worktime_indicator
-        s8 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_1)
-        s9 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_2)
-        s10 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_3)
-        s11 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_4)
-        s12 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_5)
+        s3 = DATA.Zone_Air_Temperature_3[-1]
+        s4 = DATA.Zone_Air_Temperature_4[-1]
+        s5 = DATA.Zone_Air_Temperature_5[-1]
+        s6 = DATA.Zone_Air_Temperature_6[-1]
+        s7 = DATA.Site_Outdoor_Air_Drybulb_Temperature[-1]
+        s8 = worktime_indicator
+        s9 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_1)
+        s10 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_2)
+        s11 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_3)
+        s12 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_4)
+        s13 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_5)
+        s14 = api.exchange.get_actuator_value(EPstate, DATA.handle_Heating_Setpoint_6)
+        s15 = api.exchange.get_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_1)
+        s16 = api.exchange.get_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_2)
+        s17 = api.exchange.get_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_3)
+        s18 = api.exchange.get_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_4)
+        s19 = api.exchange.get_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_5)
+        s20 = api.exchange.get_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_6)
+        s21 = is_summer
 
         E = DATA.Electricity_HVAC[-1]
         # s8 = DATA.T_months[-1]
         # s9 = DATA.T_days[-1]
         # s10 = DATA.T_hours[-1]
-        state0 = [s1 / 100, s2 / 100, s3 / 100, s4 / 100, s5 / 100,
-                  s6, s7,
-                  s8, s9, s10, s11, s12]
+        state0 = [s1/100, s2/100, s3/100, s4/100, s5/100, s6/100,
+                  s7, s8, ]
+                  #s9/100, s10/100, s11/100, s12/100, s13/100, s14/100, s15/100, s16/100, s17/100, s18/100, s19/100, s20/100, s21/100]
         DATA.state.append(state0)
-        Temp_list = [s1, s2, s3, s4, s5]
-        Temp_mean = sum(Temp_list) / len(Temp_list)
+        Temp_list = [s1, s2, s4, s5, s6]
+        Temp_mean = sum(Temp_list)/len(Temp_list)
 
         ''' reward for last episode'''
         #  Energy reward
-        if worktime_indicator:
-            factor_E = 1e-7
+        if is_summer == 10:
+            factor_E = 5e-5
+            # factor_E = (5e-4)/(abs(Temp_mean- s7)+1)
             # factor_E = 0
         else:
-            # factor_E = 5e-7
-            factor_E = 0
+            factor_E = 5e-6
+            # factor_E = 0
         reward_E = - factor_E * E
 
         #  Temperature reward
         if worktime_indicator:
-            positive = 0
-            factor_T = 2
+            positive = 3
+            factor_T = 5
         else:
             positive = 0
             factor_T = 0
         reward_T_list = []
         for T in Temp_list:
             if 24 < T < 26:
-                reward_T_list.append(positive * T)
+                delta = abs(T-25)
+                if delta < 0.1:
+                    reward_T_list.append(50)
+                else:
+                    reward_T_list.append(positive * (1/delta))
+            elif T < 24:
+                reward_T_list.append(-abs(T - 24) ** 2 * factor_T)
             else:
-                reward_T_list.append(-abs(T - 25) ** 2 * factor_T)
-        reward_T = np.mean(reward_T_list)
+                reward_T_list.append(-abs(T - 26) ** 2 * factor_T)
+        T_standard_deviation = -np.std(Temp_list, ddof=1)
+        reward_T_list.append(T_standard_deviation * 2)
+        reward_T = np.sum(reward_T_list)
+
 
         #  wear-out reward
         if DATA.wear_out_flag:
-            shift_signal = (np.array(
-                random.choice(DATA.HVAC_action_map) if len(DATA.action) < 2 else DATA.HVAC_action_map[DATA.action[-2]])
-                            ^ np.array(
-                        random.choice(DATA.HVAC_action_map) if len(DATA.action) < 1 else DATA.HVAC_action_map[
-                            DATA.action[-1]]))
-            n_shift_signal = np.sum(shift_signal == 1)
-            factor_S = 10
+            if len(DATA.action) >= 2:
+                last_a = DATA.HVAC_action_map[DATA.action[-2]]
+                current_a = DATA.HVAC_action_map[DATA.action[-1]]
+            elif len(DATA.action) == 1:
+                last_a = random.choice(DATA.HVAC_action_map)
+                current_a = DATA.HVAC_action_map[DATA.action[-1]]
+            else:
+                last_a = random.choice(DATA.HVAC_action_map)
+                current_a = random.choice(DATA.HVAC_action_map)
+
+            n_shift_signal = sum(1 for x, y in zip(last_a, current_a) if x != y)
+            factor_S = 3
             reward_S = - factor_S * n_shift_signal
             # if DATA.wear_out_flag:
             reward_ = reward_E + reward_T + reward_S
@@ -419,10 +472,14 @@ def callback_function(EPstate):
         '''Temperature Violation'''
         Temp_mean_violation = 0
         if worktime_indicator:
-            if Temp_mean > 26:
-                Temp_mean_violation = Temp_mean - 25
-            elif Temp_mean < 24:
-                Temp_mean_violation = 24 - Temp_mean
+            if 24 <= Temp_mean <= 26:
+                Temp_mean_violation = 0
+            else:
+                Temp_mean_violation = 1
+            # elif Temp_mean > 26:
+            #     Temp_mean_violation = Temp_mean - 25
+            # else:
+            #     Temp_mean_violation = 24 - Temp_mean
         DATA.Temp_mean_violation.append(Temp_mean_violation)
 
         Temp_violation = []
@@ -440,24 +497,36 @@ def callback_function(EPstate):
         DATA.action.append(action0)
         action_list = DATA.HVAC_action_map[action0]
         #  put action into EP for next simulation step
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Heating_Setpoint_1, HVAC_setting_value(action_list[0])[0])
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_1, HVAC_setting_value(action_list[0])[1])
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Heating_Setpoint_2, HVAC_setting_value(action_list[1])[0])
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_2, HVAC_setting_value(action_list[1])[1])
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Heating_Setpoint_3, HVAC_setting_value(action_list[2])[0])
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_3, HVAC_setting_value(action_list[2])[1])
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Heating_Setpoint_4, HVAC_setting_value(action_list[3])[0])
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_4, HVAC_setting_value(action_list[3])[1])
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Heating_Setpoint_5, HVAC_setting_value(action_list[4])[0])
-        api.exchange.set_actuator_value(EPstate, DATA.handle_Cooling_Setpoint_5, HVAC_setting_value(action_list[4])[1])
+        actuators = [
+            DATA.handle_Heating_Setpoint_1,
+            DATA.handle_Cooling_Setpoint_1,
+            DATA.handle_Heating_Setpoint_2,
+            DATA.handle_Cooling_Setpoint_2,
+            DATA.handle_Heating_Setpoint_3,
+            DATA.handle_Cooling_Setpoint_3,
+            DATA.handle_Heating_Setpoint_4,
+            DATA.handle_Cooling_Setpoint_4,
+            DATA.handle_Heating_Setpoint_5,
+            DATA.handle_Cooling_Setpoint_5,
+            DATA.handle_Heating_Setpoint_6,
+            DATA.handle_Cooling_Setpoint_6,
+        ]
+
+        end = 0
+        for i in action_list:
+            # set_value = HVAC_setting_value(i)
+            # print('原来h', api.exchange.get_actuator_value(EPstate, actuators[2 * i_index]))
+            # print('原来c', api.exchange.get_actuator_value(EPstate, actuators[2 * i_index + 1]))
+            api.exchange.set_actuator_value(EPstate, actuators[2*end], i)
+            # print(api.exchange.get_actuator_value(EPstate, actuators[2*i_index]))
+            api.exchange.set_actuator_value(EPstate, actuators[2*end+1], i+2)
+            # print(api.exchange.get_actuator_value(EPstate, actuators[2*i_index+1]))
+            end += 1
 
         #  Done
-        # done = True
+        if Temp_violation < 6:
+            done = True
         DATA.done.append(done)
-
-
-
-
 
     else:
         DATA.reward.append(None)
@@ -465,7 +534,6 @@ def callback_function(EPstate):
         DATA.loss.append(None)
         DATA.loss_random_memory.append(None)
 
-        # torch.save(EPagent.target_Q_net.state_dict(), f'./weights/EPagent_{epoch}.pth')
 
     DATA.count += 1
     """Plot"""
@@ -475,9 +543,11 @@ def callback_function(EPstate):
             update_plot(draw)
 
     if DATA.train_switch and worktime_indicator:
-        if DATA.count % 5000 == 0:
+        if DATA.count % 2000 == 0:
             print(
-                f'Time: {DATA.count} / {dt}   Temp: {Temp_mean:.3f} / 25 / {s6:.3f}   Reward(T/E/S): {reward_T:.3f} / {reward_E:.3f} / {reward_S:.3f}')
+                f'Time: {DATA.count} / {dt}   Temp: {Temp_mean:.2f} / 25 / {s7:.2f}   Reward(T/E/S): {reward_T:.2f} / {reward_E:.2f} / {reward_S:.2f}')
+
+    DATA.is_handle = False
 
 
 class Run_EPlus():
@@ -562,8 +632,9 @@ class Run_EPlus():
         EPapi.state_manager.delete_state(EPstate)
         # if not DATA.train_switch:
         #     EPapi.state_manager.delete_state(EPstate)
-        if not draw.is_ion:
-            update_plot(draw)
+        if DATA.train_switch:
+            if not draw.is_ion:
+                update_plot(draw)
 
 
     def remove_folder(self, path):
@@ -575,7 +646,7 @@ if __name__ == '__main__':
     weather_Dir = "./weather_data/CHN_Beijing.Beijing.545110_CSWD.epw"
     out_Dir = "./out"
     # IDF_Dir = "./building_model/new_ue_room/1-18/1.18.osm"
-    IDF_Dir = "./EPmodel/1.18.osm"
+    IDF_Dir = "./EPmodel/1.19.osm"
     # IDF_Dir = r"C:\Users\Lee\Desktop\1-18\1.18.osm"
     # IDF_Dir = "./sp/sp.osm"
     weights_Dir = "./weights"
@@ -589,12 +660,10 @@ if __name__ == '__main__':
     run_instance = Run_EPlus(weather_Dir, out_Dir, IDF_Dir)
     run_instance.start_simulation(iscallback=True, isEPtoConsole=True)
 
+    RHVAC_power = DATA.Electricity_HVAC
     RuleBasedEnergyConsumption =sum(DATA.Electricity_HVAC)
 
     # save_to_csv(DATA)
-
-
-
 
     '''DQN training'''
     DATA = Data_Center()
@@ -604,19 +673,18 @@ if __name__ == '__main__':
     DATA.train_switch = True
     DATA.wear_out_flag = True
     draw = Drawing(DATA, is_ion=False, is_zoom=False)
-    # ReplayBuffer = ReplayBuffer(max_length=128)
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     EPagent = DQN(
-        state_dim=12,
-        action_dim=32,
-        lr=0.001,
+        state_dim=8,
+        action_dim=729,
+        lr=0.01,
         gamma=0.9,
         epsilon=0,
         device=device,
         update_interval=72
     )
-    # EPagent.target_Q_net.load_state_dict(torch.load('./pth_model_1-18/EPagent_1.pth'))
-    EPagent.target_Q_net.load_state_dict(torch.load('./BESTMODEL/best_3.9_EPagent_1.pth'))
+    # EPagent.target_Q_net.load_state_dict(torch.load('./BESTMODEL/episode_52318.pth'))
+    EPagent.target_Q_net.load_state_dict(torch.load('./weights/EPagent_1.pth'))
     EPagent.target_Q_net.eval()
 
     run_instance = Run_EPlus(weather_Dir, out_Dir, IDF_Dir, weights_Dir)
@@ -635,40 +703,29 @@ if __name__ == '__main__':
     print('Training begins')
     print('\n')
 
-    GO = time.time()
-    # for epoch in tqdm(range(1, Epoch + 1), desc='Training process: ', unit='eposide'):
-
-
-    #  initialize some variables at the beginning of each epoch
-    # DATA.initialize_handels()
-    # DATA.initialize_valuse()
-    # DATA.count = 0
-
     #  Run the training
     run_instance.start_simulation(iscallback=True, isEPtoConsole=False)
 
-    #  output some values to the console
-    # DATA.loss_epoch.append(sum(DATA.loss_random_memory)/len(DATA.loss_random_memory))
-    # DATA.reward_epoch.append(sum(DATA.reward_random_memory)/len(DATA.reward_random_memory))
-    # print(f'Training loss: {DATA.loss_epoch[-1]:.2f}')
-    # print(f'Reward: {DATA.reward_epoch[-1]:.2f}')
-    # time_delta = time.time() - GO
+    DQNHVAC_power = DATA.Electricity_HVAC
     DQNEnergyConsumption = sum(DATA.Electricity_HVAC)
+    plt.figure(figsize=(20, 10))
+    plt.plot(range(1,len(RHVAC_power)+1), RHVAC_power, label="Rule Based Power", color='#5b9bd5', linewidth=3)
+    plt.plot(range(1,len(DQNHVAC_power)+1), DQNHVAC_power, label="DQN Based Power", color='#ed7d31', linewidth=3)
+    plt.tick_params(axis='x', labelsize=18)
+    plt.tick_params(axis='y', labelsize=18)
+    plt.title('Annual Energy Consumption', fontsize=22)
+    plt.xlabel('Episode', fontsize=22)
+    plt.ylabel('Energy Consumption(J)', fontsize=22)
+    plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
+    plt.show()
+
+    plt.figure(figsize=(20, 10))
+    plt.scatter(range(1,len(DATA.Temp_mean_violation)+1), DATA.Temp_mean_violation, label="Temp mean violation", color='red', linewidth=2)
+    plt.show()
+
     print(f'Rule-based Energy consumption: {RuleBasedEnergyConsumption:.3f}J')
     print(f'DQN Energy consumption: {DQNEnergyConsumption:.3f}J')
     print('\n')
+    print(f"Energy saving ratio: {1-(DQNEnergyConsumption/RuleBasedEnergyConsumption):.3f}")
 
-    print(f"Energy saving ratio: {(DQNEnergyConsumption/RuleBasedEnergyConsumption):.3f}")
-    # plt.figure(figsize=(12, 4))
-    # plt.subplot(1, 2, 1)
-    # # plt.plot(range(1, len(DATA.loss)+1), DATA.loss, 'ro-', label='train loss')
-    # plt.plot(range(1, Epoch+1), DATA.loss_epoch, 'ro-', label='train loss')
-    # plt.xlabel('epoch')
-    # plt.ylabel('train loss')
-    #
-    # plt.subplot(1, 2, 2)
-    # # plt.plot(range(1, len(DATA.reward)+1), DATA.reward, 'bs-', label='reward')
-    # plt.plot(range(1, Epoch+1), DATA.reward_epoch, 'bs-', label='reward')
-    # plt.xlabel('epoch')
-    # plt.ylabel('reward')
-    # plt.show()
+    print(f"Temperature Violation ratio: {(sum(DATA.Temp_mean_violation) / len(DATA.Temp_mean_violation)):.3f}")

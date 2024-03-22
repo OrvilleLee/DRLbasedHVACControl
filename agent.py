@@ -55,7 +55,9 @@ class DQN:
         if self.count % self.update_interval == 0:
             # print(f'Q网络已更新，count={self.count}')
             self.target_Q_net.load_state_dict(
-                self.target_Q_net.state_dict()
+                self.Q_net.state_dict()
             )
         self.count += 1
+        # if loss < 100:
+        #     torch.save(self.target_Q_net.state_dict(), f'./BESTMODEL/episode_{self.count}.pth')
         return loss.item()

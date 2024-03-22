@@ -75,10 +75,10 @@ class osm2idf():
             print(i)
 
         self.set_timestep(12)
-        self.set_run_period(1,1,12,31)
+        self.set_run_period(1, 1, 12, 31)
         self.sava2idf()
 
-    def set_run_period(self, begin_M=1, begin_D=1, end_M=1, end_D=31):
+    def set_run_period(self, begin_M=1, begin_D=1, end_M=12, end_D=31):
 
         """
         the default settings of run period is from 1.1 to 1.31
